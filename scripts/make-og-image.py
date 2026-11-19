@@ -7,6 +7,10 @@ Bukan screenshot asli — kartu desain editorial dari data demo repo:
 
 Output:
   landing/og-image.png        1200x630 (>= 10 KB, dipakai tag og:image)
+  web/og-image.png            salinan yang sama — WAJIB ada: build/web
+                              Flutter hanya menyertakan isi web/, jadi
+                              tanpa salinan ini og:image 404 saat app
+                              di-deploy (tag menunjuk /og-image.png).
   web/favicon.png             64x64
   web/icons/Icon-192.png      192x192
   web/icons/Icon-512.png      512x512
@@ -127,6 +131,11 @@ def make_og():
     os.makedirs(os.path.dirname(out), exist_ok=True)
     img.save(out, "PNG", optimize=True)
     print(f"saved {out} ({os.path.getsize(out)} bytes)")
+    # Salinan untuk build web Flutter (lihat docstring): build/web hanya
+    # berisi isi web/, jadi og-image harus ada di sana juga.
+    web_out = os.path.join(ROOT, "web", "og-image.png")
+    img.save(web_out, "PNG", optimize=True)
+    print(f"saved {web_out} ({os.path.getsize(web_out)} bytes)")
 
 
 def make_icon(size, out_path, maskable=False):

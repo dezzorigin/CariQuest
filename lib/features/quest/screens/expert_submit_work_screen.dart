@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../../shared/utils/ui_helpers.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../providers/quest_controller.dart';
@@ -59,13 +60,13 @@ class _ExpertSubmitWorkScreenState extends ConsumerState<ExpertSubmitWorkScreen>
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.blue.shade50,
+                color: AppColors.infoLight,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.blue.shade200),
+                border: Border.all(color: AppColors.info),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.security, color: Colors.blue.shade700),
+                  const Icon(Icons.security, color: AppColors.info),
                   const SizedBox(width: 12),
                   const Expanded(
                     child: Text(

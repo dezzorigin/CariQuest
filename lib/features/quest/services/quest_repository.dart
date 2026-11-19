@@ -47,35 +47,12 @@ class QuestRepository {
 
   Future<void> finishQuest(String questId) async {
     final quest = _db.quests.firstWhere((q) => q.questId == questId);
-    
-    // Update Quest status
-    final updatedQuest = QuestModel(
-      questId: quest.questId,
-      seekerUid: quest.seekerUid,
-      expertUid: quest.expertUid,
-      title: quest.title,
-      description: quest.description,
-      jobdeskDetail: quest.jobdeskDetail,
-      deadline: quest.deadline,
-      minBudget: quest.minBudget,
-      maxBudget: quest.maxBudget,
-      finalPrice: quest.finalPrice,
-      isUrgent: quest.isUrgent,
-      urgentMarkupPct: quest.urgentMarkupPct,
+
+    // Update Quest status (copyWith: semua field lain dipertahankan).
+    _db.updateQuest(quest.copyWith(
       status: QuestStatus.finished,
-      expertAccepted: quest.expertAccepted,
-      negoPrice: quest.negoPrice,
-      negoStatus: quest.negoStatus,
-      revisionCount: quest.revisionCount,
-      revisionNotes: quest.revisionNotes,
-      previewFileUrl: quest.previewFileUrl,
-      finalFileUrl: quest.finalFileUrl,
-      createdAt: quest.createdAt,
-      paidAt: quest.paidAt,
-      submittedAt: quest.submittedAt,
       completedAt: DateTime.now(),
-    );
-    _db.updateQuest(updatedQuest);
+    ));
 
     // Update Expert EXP & Saldo
     if (quest.expertUid != null) {
@@ -94,21 +71,10 @@ class QuestRepository {
 
   Future<void> updateQuestStatus(String questId, QuestStatus status) async {
     final quest = _db.quests.firstWhere((q) => q.questId == questId);
-    _db.updateQuest(QuestModel(
-      questId: quest.questId,
-      seekerUid: quest.seekerUid,
-      expertUid: quest.expertUid,
-      title: quest.title,
-      description: quest.description,
-      jobdeskDetail: quest.jobdeskDetail,
-      deadline: quest.deadline,
-      minBudget: quest.minBudget,
-      maxBudget: quest.maxBudget,
-      finalPrice: quest.finalPrice,
-      isUrgent: quest.isUrgent,
-      status: status,
-      createdAt: quest.createdAt,
-    ));
+    // copyWith: dulu rebuild manual hanya menyalin 12 dari 24 field —
+    // cancel/revisi diam-diam menghapus finalPrice, paidAt, finalFileUrl,
+    // nego, revisi, dan urgent. Sekarang semua field dipertahankan.
+    _db.updateQuest(quest.copyWith(status: status));
   }
 
   Future<void> cancelQuest(String questId) async {
@@ -117,18 +83,10 @@ class QuestRepository {
 
   Future<void> submitWork(String questId, String fileUrl) async {
     final quest = _db.quests.firstWhere((q) => q.questId == questId);
-    _db.updateQuest(QuestModel(
-      questId: quest.questId,
-      seekerUid: quest.seekerUid,
-      expertUid: quest.expertUid,
-      title: quest.title,
-      description: quest.description,
-      jobdeskDetail: quest.jobdeskDetail,
-      deadline: quest.deadline,
-      minBudget: quest.minBudget,
-      maxBudget: quest.maxBudget,
+    // copyWith: dulu rebuild manual menghapus finalPrice/paidAt/isUrgent/
+    // nego/revisi — payout finishQuest lalu jatuh ke maxBudget (salah).
+    _db.updateQuest(quest.copyWith(
       status: QuestStatus.review,
-      createdAt: quest.createdAt,
       finalFileUrl: fileUrl,
       submittedAt: DateTime.now(),
     ));
@@ -140,28 +98,33 @@ class QuestRepository {
 
   Future<void> acceptDirectQuest(String questId, String seekerUid, {int? finalPrice}) async {
     final quest = _db.quests.firstWhere((q) => q.questId == questId);
-    _db.updateQuest(QuestModel(
-      questId: quest.questId,
-      seekerUid: quest.seekerUid,
-      expertUid: quest.expertUid,
-      title: quest.title,
-      description: quest.description,
-      jobdeskDetail: quest.jobdeskDetail,
-      deadline: quest.deadline,
-      minBudget: quest.minBudget,
-      maxBudget: quest.maxBudget,
+    _db.updateQuest(quest.copyWith(
       status: QuestStatus.working, // jump to working in mock
       expertAccepted: true,
       finalPrice: finalPrice ?? quest.minBudget,
-      createdAt: quest.createdAt,
     ));
   }
 
   Future<void> requestNego(String questId, String seekerUid, int negoPrice) async {
-    // Mock implementation
+    // Dulu no-op kosong: expert kirim nego tapi harga tak pernah tersimpan,
+    // seeker tidak pernah melihat tawaran itu.
+    final quest = _db.quests.firstWhere((q) => q.questId == questId);
+    _db.updateQuest(quest.copyWith(
+      negoPrice: negoPrice,
+      negoStatus: 'waiting',
+    ));
   }
 
   Future<void> acceptNego(String questId, int negoPrice) async {
-    // Mock implementation
+    // Dulu no-op kosong: seeker "Setuju & Bayar" tapi negoStatus tetap
+    // 'waiting' sehingga kartu nego terus muncul, dan finalPrice tak
+    // pernah ditulis (payout/finish memakai harga lama).
+    final quest = _db.quests.firstWhere((q) => q.questId == questId);
+    _db.updateQuest(quest.copyWith(
+      negoPrice: negoPrice,
+      negoStatus: 'accepted',
+      finalPrice: negoPrice,
+      expertAccepted: true,
+    ));
   }
 }

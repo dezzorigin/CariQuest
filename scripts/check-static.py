@@ -105,6 +105,18 @@ def check_og_image():
         if im.size != (1200, 630):
             fail(f"OG: og-image.png {im.size}, harus (1200, 630)")
     print(f"OK: og-image.png {size} byte, 1200x630")
+    # Salinan web/ (dipakai build/web Flutter): tanpa ini og:image 404
+    # saat app di-deploy — tag og:image menunjuk /og-image.png.
+    wp = os.path.join(ROOT, "web", "og-image.png")
+    if not os.path.exists(wp):
+        fail("OG: web/og-image.png hilang (salinan untuk build/web)")
+        return
+    with Image.open(wp) as im:
+        if im.size != (1200, 630):
+            fail(f"OG: web/og-image.png {im.size}, harus (1200, 630)")
+    if os.path.getsize(wp) < 10240:
+        fail("OG: web/og-image.png < 10 KB")
+    print("OK: web/og-image.png ada, 1200x630")
 
 
 def check_real_data():

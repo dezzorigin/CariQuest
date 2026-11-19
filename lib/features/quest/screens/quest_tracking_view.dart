@@ -98,13 +98,17 @@ class QuestTrackingView extends ConsumerWidget {
         return _DirectQuestResponseCard(quest: quest, ref: ref);
       }
 
-      // Working → kirim hasil
+      // Working → kirim hasil via layar submit (validasi link + catatan).
+      // Dulu tombol ini langsung submitWork(id, 'mock_file_url') — URL
+      // palsu, tanpa validasi, dan ExpertSubmitWorkScreen tak terjangkau.
       if (status == QuestStatus.working) {
         return CustomButton(
           text: 'Kirim Hasil Kerja',
           icon: Icons.upload_file,
-          onPressed: () =>
-              controller.submitWork(quest.questId, 'mock_file_url'),
+          onPressed: () => context.pushNamed(
+            'expertSubmitWork',
+            pathParameters: {'questId': quest.questId},
+          ),
         );
       }
     }
