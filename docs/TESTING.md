@@ -39,7 +39,36 @@ ditutup oleh e2e landing untuk etalase dan play-test manual untuk app),
 dan build Android (plugin `google-services` di `build.gradle` belum
 dicabut — lihat `docs/ARCHITECTURE.md` §7).
 
-## 3. E2E landing (Playwright, hanya CI)
+## 3. Font di tes (google_fonts — jebakan yang sudah dilewati)
+
+Tes tema memanggil `AppTypography` yang memakai `GoogleFonts.*`.
+Di tes, `HttpClient` TestWidgetsFlutterBinding mengembalikan 400
+untuk semua request jaringan, jadi fetch font runtime selalu gagal
+*sesudah* tes selesai (`failed after test completion`).
+
+Solusi (pola dokumen google_fonts):
+
+- `test/app_theme_test.dart` mematikan fetch runtime:
+  `GoogleFonts.config.allowRuntimeFetching = false;` di `main()`.
+- Dengan fetching mati, google_fonts memuat font dari **asset app** —
+  jadi `assets/fonts/` WAJIB dideklarasi di `pubspec.yaml` dan berisi
+  file TTF asli dengan nama yang diharapkan google_fonts
+  (`PlusJakartaSans-Regular.ttf`, `Fraunces-Bold.ttf`, dst).
+- Nama family di assertion adalah nama internal google_fonts tanpa
+  spasi: `contains('PlusJakartaSans')`, bukan `'Plus Jakarta Sans'`.
+
+Temuan saat PR ini: kelima file `PlusJakartaSans-*.ttf` di repo
+ternyata **halaman HTML error 1.636 byte** (bukan font) — hasil
+unduhan gagal yang ter-commit. Diganti file TTF statis asli dari
+Google Fonts (URL `fonts.gstatic.com/s/a/<sha256>.ttf` dari tabel
+google_fonts 6.2.1; SHA256 + ukuran + name table diverifikasi), dan
+ditambah 3 file Fraunces statis (Regular/SemiBold/Bold — repo
+sebelumnya tidak punya file Fraunces sama sekali; display font
+hanya jalan saat online). Di aplikasi, fetch runtime tetap aktif,
+jadi file asset ini tidak mengubah rendering saat online — hanya
+menjamin tes + mode offline.
+
+## 4. E2E landing (Playwright, hanya CI)
 
 `e2e/landing.spec.ts` (7 tes): judul + hero + fakta demo, tag OG/Twitter,
 5 kartu quest + saring status (Selesai = 1 kartu), tabel 3 akun demo,
@@ -52,7 +81,7 @@ Lokal (VM dev): Chromium tidak bisa start (sandbox EPERM) — e2e hanya
 di CI. Menjalankan `npm run e2e` lokal akan gagal di langkah browser;
 itu keterbatasan VM, bukan kegagalan tes.
 
-## 4. Follow-up (bukan gate merge)
+## 5. Follow-up (bukan gate merge)
 
 - [ ] **Screenshot isi aplikasi** (desktop + mobile) untuk README —
   butuh browser live / VM pulih; `flutter run -d chrome` + rekam layar.

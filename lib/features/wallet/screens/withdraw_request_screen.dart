@@ -50,25 +50,24 @@ class _WithdrawRequestScreenState extends ConsumerState<WithdrawRequestScreen> {
 
   int get _netAmount => _parsedAmount - _fee;
 
-  void _onSubmit() {
+  Future<void> _onSubmit() async {
     UiHelpers.hideKeyboard(context);
     if (!_formKey.currentState!.validate()) return;
 
-    ref
-        .read(walletControllerProvider.notifier)
-        .requestWithdrawal(
-          amount: _parsedAmount,
-          destination: '$_selectedMethod - ${_targetAccountCtrl.text.trim()}',
-        )
-        .then((_) {
-      if (!context.mounted) return;
-      UiHelpers.showSuccessSnackBar(
-          context, 'Permintaan penarikan berhasil diajukan!');
-      context.pop();
-    }).catchError((e) {
-      if (!context.mounted) return;
+    try {
+      await ref.read(walletControllerProvider.notifier).requestWithdrawal(
+        amount: _parsedAmount,
+        destination: '$_selectedMethod - ${_targetAccountCtrl.text.trim()}',
+      );
+    } catch (e) {
+      if (!mounted) return;
       UiHelpers.showErrorSnackBar(context, e.toString());
-    });
+      return;
+    }
+    if (!mounted) return;
+    UiHelpers.showSuccessSnackBar(
+        context, 'Permintaan penarikan berhasil diajukan!');
+    context.pop();
   }
 
   @override

@@ -24,7 +24,7 @@ class _ExpertSubmitWorkScreenState extends ConsumerState<ExpertSubmitWorkScreen>
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     UiHelpers.hideKeyboard(context);
     final url = _fileUrlCtrl.text.trim();
     if (url.isEmpty || !url.startsWith('http')) {
@@ -32,17 +32,16 @@ class _ExpertSubmitWorkScreenState extends ConsumerState<ExpertSubmitWorkScreen>
       return;
     }
 
-    ref.read(questControllerProvider.notifier)
-       .submitWork(widget.questId, url)
-       .then((_) {
-         if (!context.mounted) return;
-         UiHelpers.showSuccessSnackBar(context, 'Karya berhasil disubmit! Sistem telah menambahkan watermark secara otomatis (Mock).');
-         context.pop();
-       })
-       .catchError((e) {
-         if (!context.mounted) return;
-         UiHelpers.showErrorSnackBar(context, e.toString());
-       });
+    try {
+      await ref.read(questControllerProvider.notifier).submitWork(widget.questId, url);
+    } catch (e) {
+      if (!mounted) return;
+      UiHelpers.showErrorSnackBar(context, e.toString());
+      return;
+    }
+    if (!mounted) return;
+    UiHelpers.showSuccessSnackBar(context, 'Karya berhasil disubmit! Sistem telah menambahkan watermark secara otomatis (Mock).');
+    context.pop();
   }
 
   @override

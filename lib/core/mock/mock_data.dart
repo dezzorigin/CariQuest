@@ -95,14 +95,14 @@ class MockData {
 
     // 2. Profiles
     profiles = [
-      ProfileModel(
+      const ProfileModel(
         uid: expertUid,
         displayName: 'Aldi Firmansyah',
         bio: 'Mobile Developer & UI Designer. Mengerjakan Flutter & Figma.',
         skillTags: const ['Flutter', 'UI/UX', 'Figma', 'Dart'],
         isVerifiedPro: true,
       ),
-      ProfileModel(
+      const ProfileModel(
         uid: seekerUid,
         displayName: 'Bunga Pratiwi',
         bio: 'Mahasiswa Manajemen yang butuh bantuan TA.',

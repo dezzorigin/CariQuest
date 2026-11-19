@@ -143,6 +143,11 @@ memutus import; dicatat sebagai utang di §7.
 - Duplikat controller/widget di dalam `lib/` (`lib/auth/` vs
   `lib/features/auth/`, widget profil di dua tempat) — dibiarkan,
   perlu PR susulan; penghapusan massal berisiko memutus import.
+- **Font `PlusJakartaSans-*.ttf` di `assets/fonts/` adalah halaman
+  HTML error** (1.636 byte) — diganti TTF statis asli + 3 file
+  Fraunces (Regular/SemiBold/Bold) di PR ini; `assets/fonts/`
+  dideklarasi di `pubspec.yaml` supaya google_fonts bisa memuat
+  offline dan tes tema lolos (detail: `docs/TESTING.md` §3).
 - File `flutter` di root (berkas kosong dari bundle lama) ikut terhapus
   di PR ini; bukan direktori.
 - `android/app/build.gradle` masih memuat plugin `google-services`
