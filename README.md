@@ -23,11 +23,24 @@ Admin.
 > Seluruh "backend" adalah `MockData` di memori yang mensimulasikan
 > database real-time. Data demo direset tiap aplikasi dijalankan ulang.
 
-![CariQuest — kartu preview](landing/og-image.png)
+## Tampilan aplikasi
 
-*Kartu preview di atas digambar dari data demo repo (bukan screenshot
-aplikasi). Screenshot asli aplikasi + video demo menyusul — lihat
-[`docs/TESTING.md`](docs/TESTING.md) § follow-up.*
+Screenshot asli dari aplikasi yang live di
+https://cariquest.pages.dev/ (direkam 19 Nov 2026, akun demo Expert —
+data mock, tanpa server):
+
+| Login + autofill demo | Dashboard Expert |
+|---|---|
+| ![Login CariQuest](docs/screenshots/shot-login.png) | ![Dashboard Expert CariQuest](docs/screenshots/shot-dashboard.png) |
+
+| Papan quest | Detail quest |
+|---|---|
+| ![Papan quest CariQuest](docs/screenshots/shot-feed.png) | ![Detail quest CariQuest](docs/screenshots/shot-detail.png) |
+
+**Video demo (10 detik):** login sebagai Expert → dashboard (Quest
+Aktif termuat) → papan quest → detail quest. Klik gambar untuk memutar:
+
+[![Video demo CariQuest](docs/demo-thumbnail.png)](docs/demo.mp4)
 
 ## Cara jalan
 
