@@ -134,8 +134,8 @@ memutus import; dicatat sebagai utang di §7.
   **dihapus di PR ini** via push tree (bukan sekadar dipindah).
 - Duplikat controller/widget di dalam `lib/` (di atas) — dibiarkan,
   perlu PR susulan.
-- Direktori `flutter/` di root kosong dan tidak terlacak git — diabaikan,
-  bukan dihapus.
+- File `flutter` di root (berkas kosong dari bundle lama) ikut terhapus
+  di PR ini; bukan direktori.
 - `android/app/build.gradle` masih memuat plugin `google-services`
   padahal `google-services.json` tidak ada di repo (sengaja, karena
   mock) — build Android akan gagal sampai plugin itu dicabut atau
