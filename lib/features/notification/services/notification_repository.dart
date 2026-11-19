@@ -3,7 +3,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import '../../../core/mock/mock_data.dart';
-import '../../../core/errors/failure.dart';
 import '../../../shared/models/notification_model.dart';
 import '../../../core/constants/app_enums.dart';
 

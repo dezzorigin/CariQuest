@@ -14,7 +14,6 @@ class MockData {
   final _profilesController = StreamController<List<ProfileModel>>.broadcast();
   final _questsController = StreamController<List<QuestModel>>.broadcast();
   final _notificationsController = StreamController<List<NotificationModel>>.broadcast();
-  final _walletsController = StreamController<List<WithdrawalModel>>.broadcast();
 
   // In-Memory Storage
   List<UserModel> users = [];

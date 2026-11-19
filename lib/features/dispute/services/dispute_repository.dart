@@ -1,7 +1,6 @@
 // lib/features/dispute/services/dispute_repository.dart
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/errors/failure.dart';
 import '../../../shared/models/models.dart';
 import 'dart:async';
 

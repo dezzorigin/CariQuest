@@ -227,6 +227,7 @@ a:focus-visible, button:focus-visible {
   display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
 }
 .quest-list .ticket { display: flex; flex-direction: column; }
+.quest-list .ticket[hidden] { display: none; }
 .quest-list .ticket-top { flex: 1; }
 .empty-note { color: var(--kabut); margin-top: 24px; }
 

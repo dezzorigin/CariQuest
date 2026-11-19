@@ -1,6 +1,5 @@
 // lib/features/profile/screens/widgets/expert_portfolio_card.dart
 // firebase_storage and file_picker removed — mock mode
-import 'package:cariquest/features/auth/providers/auth_controller.dart';
 import 'package:cariquest/features/profile/providers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

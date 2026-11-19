@@ -8,6 +8,10 @@ import 'package:cariquest/core/theme/app_theme.dart';
 import 'package:cariquest/core/theme/app_typography.dart';
 
 void main() {
+  // google_fonts memuat font saat AppTypography.textTheme dibangun;
+  // tanpa binding, loadFontIfNecessary melempar async error di test().
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('AppColors — palet Rimba/Emas', () {
     test('primer = Rimba #1B4332, bukan ungu lama #6C2BD9', () {
       expect(AppColors.primary, const Color(0xFF1B4332));

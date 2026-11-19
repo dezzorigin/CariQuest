@@ -6,7 +6,6 @@ import '../providers/profile_controller.dart';
 import '../../../shared/models/models.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_enums.dart';
-import '../../auth/providers/auth_controller.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   final ProfileModel profile;
