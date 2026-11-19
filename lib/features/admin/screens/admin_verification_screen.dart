@@ -72,8 +72,8 @@ class AdminVerificationScreen extends ConsumerWidget {
                         children: [
                           CircleAvatar(
                             backgroundColor: isExpert
-                                ? AppColors.primary.withOpacity(0.1)
-                                : Colors.orange.withOpacity(0.1),
+                                ? AppColors.primary.withValues(alpha: 0.1)
+                                : Colors.orange.withValues(alpha: 0.1),
                             child: Icon(
                               isExpert ? Icons.school : Icons.person,
                               color:

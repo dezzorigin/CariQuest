@@ -3,6 +3,7 @@
 // konstruksi TextStyle, tanpa unduh font.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cariquest/core/constants/app_colors.dart';
 import 'package:cariquest/core/theme/app_theme.dart';
 import 'package:cariquest/core/theme/app_typography.dart';
@@ -11,6 +12,10 @@ void main() {
   // google_fonts memuat font saat AppTypography.textTheme dibangun;
   // tanpa binding, loadFontIfNecessary melempar async error di test().
   TestWidgetsFlutterBinding.ensureInitialized();
+  // Di tes, HttpClient TestWidgetsFlutterBinding mengembalikan 400
+  // untuk semua request jaringan: matikan fetch runtime supaya tidak
+  // ada async error sesudah tes selesai (pola dokumen google_fonts).
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   group('AppColors — palet Rimba/Emas', () {
     test('primer = Rimba #1B4332, bukan ungu lama #6C2BD9', () {
@@ -41,8 +46,8 @@ void main() {
       final theme = AppTypography.textTheme;
       expect(theme.displayLarge?.fontFamily, contains('Fraunces'));
       expect(theme.headlineMedium?.fontFamily, contains('Fraunces'));
-      expect(theme.bodyMedium?.fontFamily, contains('Plus Jakarta Sans'));
-      expect(theme.titleMedium?.fontFamily, contains('Plus Jakarta Sans'));
+      expect(theme.bodyMedium?.fontFamily, contains('PlusJakartaSans'));
+      expect(theme.titleMedium?.fontFamily, contains('PlusJakartaSans'));
     });
 
     test('priceTag memakai emas gelap', () {

@@ -74,12 +74,12 @@ class _RoleCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(24.0),
         decoration: BoxDecoration(
-          border: Border.all(color: color.withOpacity(0.3), width: 2),
+          border: Border.all(color: color.withValues(alpha: 0.3), width: 2),
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
             colors: [
-              color.withOpacity(0.05),
-              color.withOpacity(0.0),
+              color.withValues(alpha: 0.05),
+              color.withValues(alpha: 0.0),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -90,7 +90,7 @@ class _RoleCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 32),
@@ -115,7 +115,7 @@ class _RoleCard extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.chevron_right, color: color.withOpacity(0.5)),
+            Icon(Icons.chevron_right, color: color.withValues(alpha: 0.5)),
           ],
         ),
       ),

@@ -132,8 +132,17 @@ memutus import; dicatat sebagai utang di §7.
 - Duplikat `app_CariQuest/` (salinan utuh aplikasi) dan
   `CariQuest-showcase/index.html` (landing ungu-gradient lama) —
   **dihapus di PR ini** via push tree (bukan sekadar dipindah).
-- Duplikat controller/widget di dalam `lib/` (di atas) — dibiarkan,
-  perlu PR susulan.
+- **Flutter 3.50 mendeprekasi `package:flutter/material.dart`**
+  (→ `package:material_ui`). Migrasi belum layak (dua pohon Material;
+  plugin masih memakai library lama) — `deprecated_member_use: ignore`
+  di `analysis_options.yaml` dengan alasan tertulis. Deprekasi lain
+  (mis. `withOpacity` → `withValues`) diperbaiki ke API baru.
+- `pubspec.lock` belum memuat `flutter_web_plugins` (baru dideklarasi
+  di PR ini) — `flutter pub get` berikutnya akan memperbarui lock;
+  tidak bisa dibuat dari VM tanpa Flutter SDK.
+- Duplikat controller/widget di dalam `lib/` (`lib/auth/` vs
+  `lib/features/auth/`, widget profil di dua tempat) — dibiarkan,
+  perlu PR susulan; penghapusan massal berisiko memutus import.
 - File `flutter` di root (berkas kosong dari bundle lama) ikut terhapus
   di PR ini; bukan direktori.
 - `android/app/build.gradle` masih memuat plugin `google-services`

@@ -35,10 +35,12 @@ class _ExpertSubmitWorkScreenState extends ConsumerState<ExpertSubmitWorkScreen>
     ref.read(questControllerProvider.notifier)
        .submitWork(widget.questId, url)
        .then((_) {
+         if (!context.mounted) return;
          UiHelpers.showSuccessSnackBar(context, 'Karya berhasil disubmit! Sistem telah menambahkan watermark secara otomatis (Mock).');
-         if (context.mounted) context.pop();
+         context.pop();
        })
        .catchError((e) {
+         if (!context.mounted) return;
          UiHelpers.showErrorSnackBar(context, e.toString());
        });
   }

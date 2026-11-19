@@ -38,9 +38,9 @@ class MockData {
     final now = DateTime.now();
 
     // 1. Users
-    final expertUid = 'demo_expert_1';
-    final seekerUid = 'demo_seeker_1';
-    final adminUid = 'demo_admin_1';
+    const expertUid = 'demo_expert_1';
+    const seekerUid = 'demo_seeker_1';
+    const adminUid = 'demo_admin_1';
 
     users = [
       UserModel(
@@ -99,7 +99,7 @@ class MockData {
         uid: expertUid,
         displayName: 'Aldi Firmansyah',
         bio: 'Mobile Developer & UI Designer. Mengerjakan Flutter & Figma.',
-        skillTags: ['Flutter', 'UI/UX', 'Figma', 'Dart'],
+        skillTags: const ['Flutter', 'UI/UX', 'Figma', 'Dart'],
         isVerifiedPro: true,
       ),
       ProfileModel(

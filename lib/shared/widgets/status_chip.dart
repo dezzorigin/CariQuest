@@ -20,39 +20,39 @@ class StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color bgColor = color?.withOpacity(0.12) ?? AppColors.grey100;
+    Color bgColor = color?.withValues(alpha: 0.12) ?? AppColors.grey100;
     Color textColor = color ?? AppColors.grey800;
     String text = label ?? 'Unknown';
 
     if (status != null) {
       switch (status!) {
         case QuestStatus.pending:
-          bgColor = AppColors.statusPending.withOpacity(0.12);
+          bgColor = AppColors.statusPending.withValues(alpha: 0.12);
           textColor = AppColors.statusPending;
           text = 'Mencari Expert';
           break;
         case QuestStatus.paid:
-          bgColor = AppColors.statusPaid.withOpacity(0.12);
+          bgColor = AppColors.statusPaid.withValues(alpha: 0.12);
           textColor = AppColors.statusPaid;
           text = 'Dana di Escrow';
           break;
         case QuestStatus.working:
-          bgColor = AppColors.statusWorking.withOpacity(0.12);
+          bgColor = AppColors.statusWorking.withValues(alpha: 0.12);
           textColor = AppColors.statusWorking;
           text = 'Sedang Dikerjakan';
           break;
         case QuestStatus.review:
-          bgColor = AppColors.statusReview.withOpacity(0.12);
+          bgColor = AppColors.statusReview.withValues(alpha: 0.12);
           textColor = AppColors.statusReview;
           text = 'Review Hasil';
           break;
         case QuestStatus.finished:
-          bgColor = AppColors.statusFinished.withOpacity(0.12);
+          bgColor = AppColors.statusFinished.withValues(alpha: 0.12);
           textColor = AppColors.statusFinished;
           text = 'Selesai';
           break;
         case QuestStatus.disputed:
-          bgColor = AppColors.statusDisputed.withOpacity(0.12);
+          bgColor = AppColors.statusDisputed.withValues(alpha: 0.12);
           textColor = AppColors.statusDisputed;
           text = 'Banding';
           break;
@@ -65,7 +65,7 @@ class StatusChip extends StatelessWidget {
     }
 
     if (color != null) {
-      bgColor = color!.withOpacity(0.12);
+      bgColor = color!.withValues(alpha: 0.12);
       textColor = color!;
     }
     if (label != null) {

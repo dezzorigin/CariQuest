@@ -61,10 +61,12 @@ class _WithdrawRequestScreenState extends ConsumerState<WithdrawRequestScreen> {
           destination: '$_selectedMethod - ${_targetAccountCtrl.text.trim()}',
         )
         .then((_) {
+      if (!context.mounted) return;
       UiHelpers.showSuccessSnackBar(
           context, 'Permintaan penarikan berhasil diajukan!');
-      if (context.mounted) context.pop();
+      context.pop();
     }).catchError((e) {
+      if (!context.mounted) return;
       UiHelpers.showErrorSnackBar(context, e.toString());
     });
   }

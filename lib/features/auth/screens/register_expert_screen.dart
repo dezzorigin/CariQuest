@@ -139,11 +139,11 @@ class _RegisterExpertScreenState extends ConsumerState<RegisterExpertScreen> {
                   child: Container(
                     height: 160,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.05),
+                      color: AppColors.primary.withValues(alpha: 0.05),
                       border: Border.all(
                         color: _ktmBytes != null
                             ? AppColors.success
-                            : AppColors.primary.withOpacity(0.3),
+                            : AppColors.primary.withValues(alpha: 0.3),
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(16),
@@ -156,7 +156,7 @@ class _RegisterExpertScreenState extends ConsumerState<RegisterExpertScreen> {
                               children: [
                                 Image.memory(_ktmBytes!, fit: BoxFit.cover),
                                 Container(
-                                  color: Colors.black.withOpacity(0.3),
+                                  color: Colors.black.withValues(alpha: 0.3),
                                   child: const Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [

@@ -37,7 +37,7 @@ class QuestCard extends StatelessWidget {
           border: Border.all(color: AppColors.grey200),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -98,11 +98,11 @@ class QuestCard extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.timer, size: 14, color: AppColors.error),
+                    const Icon(Icons.timer, size: 14, color: AppColors.error),
                     const SizedBox(width: 4),
                     Text(
                       'URGENT (+${(quest.urgentMarkupPct * 100).toInt()}% Fee)',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: AppColors.error,

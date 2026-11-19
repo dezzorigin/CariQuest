@@ -18,7 +18,7 @@ class ExpertDashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(userProvider);
     final activeQuestsAsync = ref.watch(expertQuestFeedProvider);
-    print('questFeed: $activeQuestsAsync');
+    debugPrint('questFeed: $activeQuestsAsync');
     final format =
         NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
 

@@ -125,10 +125,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryDark.withOpacity(0.06),
+                      color: AppColors.primaryDark.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
-                          color: AppColors.primaryDark.withOpacity(0.2)),
+                          color: AppColors.primaryDark.withValues(alpha: 0.2)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,7 +251,7 @@ class _DemoCredentialRow extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
           border:
-              Border.all(color: AppColors.primaryDark.withOpacity(0.12)),
+              Border.all(color: AppColors.primaryDark.withValues(alpha: 0.12)),
         ),
         child: Row(
           children: [
@@ -266,7 +266,7 @@ class _DemoCredentialRow extends StatelessWidget {
                   overflow: TextOverflow.ellipsis),
             ),
             Icon(Icons.touch_app_rounded,
-                size: 14, color: AppColors.primaryDark.withOpacity(0.5)),
+                size: 14, color: AppColors.primaryDark.withValues(alpha: 0.5)),
           ],
         ),
       ),

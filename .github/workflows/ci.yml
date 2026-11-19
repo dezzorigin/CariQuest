@@ -3,7 +3,11 @@ name: CI
 # CI untuk cariquest (repo P1 #49 — Flutter pertama di rantai:
 # marketplace talenta mahasiswa USK, mock MVP offline 100%).
 # Job:
-#   flutter-analyze — flutter analyze (tanpa --fatal-infos; error = gagal).
+#   flutter-analyze — flutter analyze (harus 0 issue: di Flutter 3.50
+#                      info pun menggagalkan — 0 error/0 warning/0 info.
+#                      Deprekasi package:flutter/material.dart diabaikan
+#                      di analysis_options.yaml (alasan di sana); sisanya
+#                      diperbaiki, bukan disembunyikan).
 #   flutter-test     — flutter test (36 tes: QuestModel lifecycle +
 #                      round-trip Map, MockData demo, StatusChip widget,
 #                      tema palet kontrak).
