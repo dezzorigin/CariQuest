@@ -163,7 +163,20 @@ jobs:
         run: npm install
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        # Arsip Ubuntu di runner GitHub kadang tak terjangkau
+        # (security.ubuntu.com gagal fetch 3x, 19 Nov 2026) — coba ulang
+        # sampai 4x sebelum gagal; tes e2e sendiri tidak pernah jalan
+        # bila langkah ini gagal.
+        run: |
+          for attempt in 1 2 3 4; do
+            if npx playwright install --with-deps chromium; then
+              exit 0
+            fi
+            echo "playwright install attempt $attempt failed; retrying in 30s..."
+            sleep 30
+          done
+          echo "playwright install failed after 4 attempts"
+          exit 1
 
       - name: E2E landing (desktop + mobile)
         run: npm run e2e
