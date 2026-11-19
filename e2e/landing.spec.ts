@@ -33,19 +33,20 @@ test.describe("landing CariQuest", () => {
 
   test("papan quest: 5 kartu demo + saring Selesai = 1", async ({ page }) => {
     await page.goto("/");
-    const cards = page.locator("#quest-list .ticket");
+    const board = page.locator("#quest-list");
+    const cards = board.locator(".ticket");
     await expect(cards).toHaveCount(5);
     await expect(
-      page.getByRole("heading", { name: "Buat Desain UI Mobile App" }),
+      board.getByRole("heading", { name: "Buat Desain UI Mobile App" }),
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Translasi Jurnal Bahasa Inggris" }),
+      board.getByRole("heading", { name: "Translasi Jurnal Bahasa Inggris" }),
     ).toBeVisible();
 
     await page.getByRole("button", { name: "Selesai", exact: true }).click();
     await expect(cards.filter({ visible: true })).toHaveCount(1);
     await expect(
-      page.getByRole("heading", { name: "Coding Tugas OOP Java" }),
+      board.getByRole("heading", { name: "Coding Tugas OOP Java" }),
     ).toBeVisible();
 
     await page.getByRole("button", { name: "Semua", exact: true }).click();
@@ -54,12 +55,13 @@ test.describe("landing CariQuest", () => {
 
   test("tabel akun demo: 3 akun + kata sandi demo123", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByText("expert@demo.com")).toBeVisible();
-    await expect(page.getByText("seeker@demo.com")).toBeVisible();
-    await expect(page.getByText("admin@demo.com")).toBeVisible();
-    await expect(page.getByText("Aldi Firmansyah")).toBeVisible();
-    await expect(page.getByText("Bunga Pratiwi")).toBeVisible();
-    await expect(page.getByText("demo123")).toBeVisible();
+    const table = page.locator(".demo-table");
+    await expect(table.getByText("expert@demo.com")).toBeVisible();
+    await expect(table.getByText("seeker@demo.com")).toBeVisible();
+    await expect(table.getByText("admin@demo.com")).toBeVisible();
+    await expect(table.getByText("Aldi Firmansyah")).toBeVisible();
+    await expect(table.getByText("Bunga Pratiwi")).toBeVisible();
+    await expect(page.locator(".copy-pass")).toHaveText("demo123");
   });
 
   test("alur 4 langkah + peran tampil", async ({ page }) => {
