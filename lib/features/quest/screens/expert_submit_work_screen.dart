@@ -66,10 +66,10 @@ class _ExpertSubmitWorkScreenState extends ConsumerState<ExpertSubmitWorkScreen>
               ),
               child: const Row(
                 children: [
-                  const Icon(Icons.security, color: AppColors.info),
-                  const SizedBox(width: 12),
-                  const Expanded(
-                    child: const Text(
+                  Icon(Icons.security, color: AppColors.info),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
                       'Karya yang dikirim akan secara otomatis ditambahkan Watermark untuk melindungi hak cipta Anda hingga pembayaran selesai.',
                       style: TextStyle(fontSize: 12),
                     ),
