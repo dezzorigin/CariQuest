@@ -99,7 +99,7 @@ class MockData {
         uid: expertUid,
         displayName: 'Aldi Firmansyah',
         bio: 'Mobile Developer & UI Designer. Mengerjakan Flutter & Figma.',
-        skillTags: const ['Flutter', 'UI/UX', 'Figma', 'Dart'],
+        skillTags: ['Flutter', 'UI/UX', 'Figma', 'Dart'],
         isVerifiedPro: true,
       ),
       const ProfileModel(
