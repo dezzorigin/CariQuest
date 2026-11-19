@@ -5,8 +5,6 @@
 // dari spinner "Quest Aktif" yang tak pernah berhenti. streamUserData
 // sudah snapshot-first; tes ini mengunci perilaku yang sama untuk
 // quests/users/profiles/notifications + update live tetap mengalir.
-import 'dart:async';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:cariquest/core/mock/mock_data.dart';
 import 'package:cariquest/shared/models/quest_model.dart';
