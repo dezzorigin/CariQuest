@@ -111,7 +111,7 @@ cariquest/
 │   ├── features/                 # modul per fitur (auth, quest, …)
 │   ├── shared/                   # models, routes, widgets, utils
 │   └── auth/                     # (duplikat lama: auth_controller)
-├── test/                         # 36 tes (lihat docs/TESTING.md)
+├── test/                         # 42 tes (lihat docs/TESTING.md)
 ├── web/                          # scaffold Flutter web (baru, PR #49)
 ├── landing/                      # etalase statis (yang di-deploy)
 ├── docs/                         # PRD → arsitektur → pakai → tes → deploy
@@ -121,11 +121,14 @@ cariquest/
 └── assets/                       # fonts Plus Jakarta Sans, images, icons
 ```
 
-Catatan: `lib/auth/` dan `lib/features/auth/` sama-sama berisi
+Catatan: `lib/auth/` dan `lib/features/auth/` dulu sama-sama berisi
 `auth_controller.dart` (duplikat historis); `lib/features/profile/`
 juga punya widget duplikat di `screens/widgets/` dan `widgets/`.
-Keduanya **tidak** dibersihkan di PR ini — penghapusan massal berisiko
-memutus import; dicatat sebagai utang di §7.
+Keduanya **sudah dibersihkan di PR #2 (audit-fix)**: semua salinan
+itu ternyata file stub 1 baris (`// TODO Implement this library.`)
+yang tidak di-import siapa pun — dihapus setelah diverifikasi tidak
+ada import (relatif `../../auth/…` dari dalam `features/` mengarah ke
+`features/auth/`, bukan ke `lib/auth/`).
 
 ## 7. Utang teknis yang dicatat (bukan dikerjakan diam-diam)
 
@@ -141,8 +144,10 @@ memutus import; dicatat sebagai utang di §7.
   di PR ini) — `flutter pub get` berikutnya akan memperbarui lock;
   tidak bisa dibuat dari VM tanpa Flutter SDK.
 - Duplikat controller/widget di dalam `lib/` (`lib/auth/` vs
-  `lib/features/auth/`, widget profil di dua tempat) — dibiarkan,
-  perlu PR susulan; penghapusan massal berisiko memutus import.
+  `lib/features/auth/`, `lib/quest/` vs `lib/features/quest/`,
+  `lib/features/providers/` vs `lib/features/profile/providers/`,
+  widget profil di `screens/widgets/` vs `widgets/`) — **dihapus di
+  PR #2 (audit-fix)**: semuanya file stub 1 baris tanpa import.
 - **Font `PlusJakartaSans-*.ttf` di `assets/fonts/` adalah halaman
   HTML error** (1.636 byte) — diganti TTF statis asli + 3 file
   Fraunces (Regular/SemiBold/Bold) di PR ini; `assets/fonts/`

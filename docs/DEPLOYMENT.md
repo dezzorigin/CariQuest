@@ -38,13 +38,36 @@ Cloudflare):
 approval host storage, jadi `build/web` tidak bisa dipindah ke
 `cf_pages.py` dari sini. Yang di-deploy adalah landing statis, dan
 landing menulis jujur bahwa aplikasi Flutter-nya adalah mock MVP
-dengan akun demo (bukan mengklaim app web sudah live).
+dengan akun demo (bukan mengklaim app web sudah live). Landing
+**sengaja dipertahankan** sampai app menggantikannya — CI (`smoke`,
+`playwright-e2e`, `static-checks`) menguji `landing/`, jadi jangan
+hapus folder itu sebelum deploy app.
 
-Langkah lanjut (follow-up, lihat `docs/TESTING.md`): unduh artifact
-`flutter-web` dari browser / jalankan deploy dari mesin yang bisa
-mengunduh artifact, play-test login demo di web, lalu deploy
-`build/web` (dengan `landing/index.html` sebagai halaman pembuka yang
-menautkan ke `/app/` — atau ganti root dengan build web).
+### Follow-up deploy (dari browser / mesin lain)
+
+Percobaan unduh artifact dari VM: **GAGAL** — `GET
+/actions/artifacts/14525255007/zip` timeout saat membaca redirect
+blob storage (19 Nov 2026, pr rework #49). Jangan diulang dari VM.
+
+1. Di browser/mesin lain, buka run CI main
+   `44513825297` (commit `f4c18c70`) → Artifacts → unduh
+   **`flutter-web`** (14,7 MB, `sha256:4bc28bad…2ec`, kedaluwarsa
+   17 Feb 2027) → unzip ke satu folder, mis. `~/flutter-web/`.
+2. Deploy folder itu ke Pages project **`cariquest`**:
+   ```bash
+   python3 ~/workspace/github-actions/cf_pages.py deploy cariquest ~/flutter-web
+   ```
+3. Verifikasi (pakai `python urllib` + User-Agent browser — UA
+   default Python kena 403 Cloudflare):
+   - root `200` + marker `Tugas kampusmu` dan
+     `Buat Desain UI Mobile App` (halaman app, bukan landing),
+   - `og-image.png` `200` `image/png` (ikut `build/web` karena
+     `web/og-image.png` sudah ada di repo sejak PR #2),
+   - login demo `expert@demo.com` / `demo123` masuk ke dashboard,
+     dan tombol **Kirim Hasil Kerja** membuka layar submit
+     (bukan langsung submit URL palsu).
+4. Setelah app live, `landing/` boleh dihapus dari repo (dan
+   `smoke`/`playwright-e2e` dialihkan ke app) — **bukan sebelum itu**.
 
 ## 4. CI
 

@@ -8,9 +8,9 @@ name: CI
 #                      Deprekasi package:flutter/material.dart diabaikan
 #                      di analysis_options.yaml (alasan di sana); sisanya
 #                      diperbaiki, bukan disembunyikan).
-#   flutter-test     — flutter test (36 tes: QuestModel lifecycle +
+#   flutter-test     — flutter test (42 tes: QuestModel lifecycle +
 #                      round-trip Map, MockData demo, StatusChip widget,
-#                      tema palet kontrak).
+#                      tema palet kontrak, regresi QuestRepository).
 #   flutter-build-web — flutter build web --release (repo sebelumnya
 #                      TANPA folder web/; scaffold ditambah di PR ini) +
 #                      upload artifact build/web.

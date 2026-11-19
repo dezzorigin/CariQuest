@@ -8,7 +8,8 @@
 | Unit data demo | `flutter test` | 11 | `MockData`: 3 pengguna, 5 quest, status, anggaran, `addQuest`/`updateQuest` |
 | Widget | `flutter test` | 9 | `StatusChip`: label tiap `QuestStatus` + label kustom + tanpa status |
 | Tema | `flutter test` | 9 | Palet kontrak, 2 font, radius 14, tema gelap |
-| **Total Flutter** | | **36** | `flutter test` |
+| Repository | `flutter test` | 6 | `QuestRepository`: submit/status/nego mempertahankan field, nego tersimpan |
+| **Total Flutter** | | **42** | `flutter test` |
 | Analisis | `flutter analyze` | — | `flutter analyze` |
 | E2E landing | Playwright | 7 | `npm run e2e` (desktop + Pixel 7, hanya CI) |
 | Gate statis | Python | — | `python3 scripts/check-static.py` |
@@ -32,6 +33,10 @@
 - **Tema** mengunci kontrak desain (palet Rimba/Emas, Fraunces +
   Plus Jakarta Sans, radius 14) supaya refactor warna tidak diam-diam
   mengembalikan ungu lama.
+- **`QuestRepository`** mengunci perbaikan audit-fix PR #2: update
+  status/submit/nego tidak boleh menghapus field lain (`copyWith`),
+  dan `requestNego`/`acceptNego` benar-benar menulis ke quest
+  (dulu keduanya no-op kosong).
 
 Yang **tidak** dites: alur login end-to-end di dalam aplikasi (butuh
 `ProviderScope` + router + `shared_preferences` — rapuh di tes unit;

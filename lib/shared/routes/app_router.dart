@@ -22,6 +22,7 @@ import '../../features/seeker/screens/seeker_nav_screen.dart';
 import '../../features/seeker/screens/seeker_dashboard_screen.dart';
 import '../../features/profile/screens/expert_profile_view.dart';
 import '../../features/quest/screens/expert_quest_feed_screen.dart';
+import '../../features/quest/screens/expert_submit_work_screen.dart';
 import '../../features/quest/screens/quest_tracking_view.dart';
 import '../../features/quest/screens/quest_detail_view.dart';
 import '../../features/payment/screens/payment_view.dart';
@@ -99,6 +100,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     debugLogDiagnostics: false,
     redirect: (context, state) {
       final loc = state.matchedLocation;
+
+      // '/' bukan layar: dulu rutenya _PlaceholderScreen tanpa tombol apa
+      // pun, jadi pengguna yang membuka root web terjebak di layar mati.
+      // Splash selalu diteruskan (login, atau dashboard via langkah 4).
+      if (loc == AppRoutes.splash) return AppRoutes.login;
 
       final isAuthScreen = loc == AppRoutes.login ||
           loc == AppRoutes.registerRole ||
@@ -320,6 +326,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         name: 'expertActiveQuest',
         builder: (context, state) =>
             QuestTrackingView(questId: state.pathParameters['questId'] ?? ''),
+      ),
+      GoRoute(
+        path: AppRoutes.expertSubmitWork,
+        name: 'expertSubmitWork',
+        builder: (context, state) => ExpertSubmitWorkScreen(
+            questId: state.pathParameters['questId'] ?? ''),
       ),
       GoRoute(
         path: AppRoutes.seekerActiveQuest,

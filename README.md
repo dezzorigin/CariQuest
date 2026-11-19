@@ -5,7 +5,11 @@
 [![Dart](https://img.shields.io/badge/Dart-%3E%3D3.3-1B4332?logo=dart&logoColor=white)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-E9C46A)](LICENSE)
 
-**Live:** https://cariquest.pages.dev/ (landing etalase) ·
+**Live:** https://cariquest.pages.dev/ — **SEMENTARA masih landing
+etalase statis** (`landing/`), bukan aplikasi Flutter-nya. Aplikasi
+Flutter sudah hijau `flutter build web` di CI, tapi `build/web`-nya
+belum bisa di-deploy dari VM (unduhan artifact GitHub mentok — lihat
+[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) § follow-up deploy). ·
 **Kode:** https://github.com/dezzorigin/cariquest
 
 CariQuest adalah marketplace talenta kampus untuk mahasiswa
@@ -32,7 +36,7 @@ flutter pub get
 flutter run            # pilih perangkat (Android / Chrome)
 flutter run -d chrome  # langsung ke web
 flutter analyze        # linter
-flutter test           # 36 tes
+flutter test           # 42 tes
 flutter build web --release   # → build/web
 ```
 
@@ -89,7 +93,7 @@ setelah Seeker menyetujui hasil (Review → Finished).
 ```text
 cariquest/
 ├── lib/            # core (tema, mock, konstanta) · features (per modul) · shared (model, route, widget)
-├── test/           # 36 tes: model, data demo, widget, tema
+├── test/           # 42 tes: model, data demo, widget, tema, repository
 ├── web/            # scaffold Flutter web (baru)
 ├── landing/        # etalase statis yang di-deploy ke Pages
 ├── docs/           # PRD · arsitektur (+ diagram) · cara pakai · testing · deploy · desain
