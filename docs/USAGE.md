@@ -23,7 +23,7 @@ Build rilis:
 flutter build apk --release   # Android
 flutter build web --release   # web → build/web (lihat docs/DEPLOYMENT.md)
 flutter analyze               # linter
-flutter test                  # 42 tes
+flutter test                  # 47 tes
 ```
 
 ## 3. Masuk (akun demo)

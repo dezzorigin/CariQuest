@@ -23,11 +23,34 @@ class MockData {
   List<WithdrawalModel> withdrawals = [];
   List<BidModel> bids = [];
 
-  // Stream Getters
-  Stream<List<UserModel>> get usersStream => _usersController.stream;
-  Stream<List<ProfileModel>> get profilesStream => _profilesController.stream;
-  Stream<List<QuestModel>> get questsStream => _questsController.stream;
-  Stream<List<NotificationModel>> get notificationsStream => _notificationsController.stream;
+  // Stream Getters — snapshot-first (replay): broadcast StreamController
+  // TIDAK me-replay emit terakhir, jadi layar yang subscribe SETELAH
+  // initDemoData() terjebak di loading selamanya. Ketahuan live 19 Nov
+  // 2026: spinner "Quest Aktif" di dashboard Expert tak pernah berhenti
+  // (feed quest, riwayat, admin, notifikasi kena dampak yang sama).
+  // Polanya sama dengan streamUserData di auth_repository.dart yang
+  // sudah snapshot-first — di sini diterapkan ke semua stream.
+  Stream<List<UserModel>> get usersStream =>
+      _replay(users, _usersController.stream);
+  Stream<List<ProfileModel>> get profilesStream =>
+      _replay(profiles, _profilesController.stream);
+  Stream<List<QuestModel>> get questsStream =>
+      _replay(quests, _questsController.stream);
+  Stream<List<NotificationModel>> get notificationsStream =>
+      _replay(notifications, _notificationsController.stream);
+
+  static Stream<List<T>> _replay<T>(
+      List<T> current, Stream<List<T>> source) {
+    return Stream<List<T>>.multi((controller) {
+      controller.add(List.from(current));
+      final sub = source.listen(
+        controller.add,
+        onError: controller.addError,
+        onDone: controller.close,
+      );
+      controller.onCancel = () => sub.cancel();
+    });
+  }
 
   void emitUsers() => _usersController.add(List.from(users));
   void emitProfiles() => _profilesController.add(List.from(profiles));

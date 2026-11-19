@@ -36,7 +36,7 @@ flutter pub get
 flutter run            # pilih perangkat (Android / Chrome)
 flutter run -d chrome  # langsung ke web
 flutter analyze        # linter
-flutter test           # 42 tes
+flutter test           # 47 tes
 flutter build web --release   # → build/web
 ```
 
@@ -93,7 +93,7 @@ setelah Seeker menyetujui hasil (Review → Finished).
 ```text
 cariquest/
 ├── lib/            # core (tema, mock, konstanta) · features (per modul) · shared (model, route, widget)
-├── test/           # 42 tes: model, data demo, widget, tema, repository
+├── test/           # 47 tes: model, data demo, widget, tema, repository, stream replay
 ├── web/            # scaffold Flutter web (baru)
 ├── landing/        # etalase statis yang di-deploy ke Pages
 ├── docs/           # PRD · arsitektur (+ diagram) · cara pakai · testing · deploy · desain

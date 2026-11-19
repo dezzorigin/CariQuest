@@ -9,7 +9,8 @@
 | Widget | `flutter test` | 9 | `StatusChip`: label tiap `QuestStatus` + label kustom + tanpa status |
 | Tema | `flutter test` | 9 | Palet kontrak, 2 font, radius 14, tema gelap |
 | Repository | `flutter test` | 6 | `QuestRepository`: submit/status/nego mempertahankan field, nego tersimpan |
-| **Total Flutter** | | **42** | `flutter test` |
+| Stream replay | `flutter test` | 5 | `MockData`: subscribe telat langsung dapat snapshot + update live mengalir |
+| **Total Flutter** | | **47** | `flutter test` |
 | Analisis | `flutter analyze` | — | `flutter analyze` |
 | E2E landing | Playwright | 7 | `npm run e2e` (desktop + Pixel 7, hanya CI) |
 | Gate statis | Python | — | `python3 scripts/check-static.py` |
@@ -37,6 +38,10 @@
   status/submit/nego tidak boleh menghapus field lain (`copyWith`),
   dan `requestNego`/`acceptNego` benar-benar menulis ke quest
   (dulu keduanya no-op kosong).
+- **Stream replay** mengunci perbaikan PR #4: keempat stream
+  `MockData` snapshot-first — layar yang subscribe sesudah
+  `initDemoData()` langsung dapat data (dulu terjebak loading
+  selamanya; ketahuan live dari spinner "Quest Aktif").
 
 Yang **tidak** dites: alur login end-to-end di dalam aplikasi (butuh
 `ProviderScope` + router + `shared_preferences` — rapuh di tes unit;
