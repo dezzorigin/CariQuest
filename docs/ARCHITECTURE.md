@@ -111,7 +111,7 @@ cariquest/
 │   ├── features/                 # modul per fitur (auth, quest, …)
 │   ├── shared/                   # models, routes, widgets, utils
 │   └── auth/                     # (duplikat lama: auth_controller)
-├── test/                         # 42 tes (lihat docs/TESTING.md)
+├── test/                         # 47 tes (lihat docs/TESTING.md)
 ├── web/                          # scaffold Flutter web (baru, PR #49)
 ├── landing/                      # etalase statis (yang di-deploy)
 ├── docs/                         # PRD → arsitektur → pakai → tes → deploy
