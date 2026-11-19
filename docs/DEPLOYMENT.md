@@ -4,9 +4,10 @@
 
 | Artefak | URL | Isi |
 |---|---|---|
-| Landing etalase (statis) | https://cariquest.pages.dev/ | `landing/` — papan quest, alur, peran, akun demo |
-| OG image | https://cariquest.pages.dev/og-image.png | Kartu 1200×630 (PIL, bukan screenshot) |
+| **Aplikasi Flutter (web)** | https://cariquest.pages.dev/ | `build/web` dari CI (lihat §3) — login demo, papan quest, submit kerja |
+| OG image | https://cariquest.pages.dev/og-image.png | Kartu 1200×630 (PIL, bukan screenshot) — ikut `build/web` via `web/og-image.png` |
 | Repo | https://github.com/dezzorigin/cariquest | Flutter app + docs + CI |
+| Etalase statis (cadangan, tidak di-deploy) | — | `landing/` di repo — papan quest, alur, peran, akun demo |
 
 Nama Pages pilihan pertama: **`cariquest`**. Fallback bila dipakai akun
 lain: `cari-quest`, lalu `quest-cari`.
@@ -18,56 +19,52 @@ Cloudflare via vault — jangan pernah tempel token di chat/repo):
 
 ```bash
 python3 ~/workspace/github-actions/cf_pages.py create-project cariquest
-python3 ~/workspace/github-actions/cf_pages.py deploy cariquest ~/workspace/cariquest/landing
+python3 ~/workspace/github-actions/cf_pages.py deploy cariquest <dir-build-web-hasil-unzip>
 ```
 
-Deploy mengunggah isi `landing/` (index.html, styles.css, app.js,
-favicon.svg, og-image.png). Verifikasi sesudah deploy (pakai
-`python urllib` + User-Agent browser — UA default Python kena 403
-Cloudflare):
+Deploy mengunggah isi `build/web` (index.html, main.dart.js,
+flutter_bootstrap.js, canvaskit/, og-image.png, …). Verifikasi
+sesudah deploy (pakai `python urllib` + User-Agent browser — UA
+default Python kena 403 Cloudflare):
 
-- root `200` + marker `Tugas kampusmu` / `CariQuest`,
+- root `200` + shell Flutter (`flutter_bootstrap.js`,
+  `Memuat papan quest`),
 - semua tag `og:*` + `twitter:*` ada,
 - `og-image.png` `200` dengan `Content-Type: image/*` (bukan
-  `text/html` — fallback Pages menipu).
+  `text/html` — fallback Pages menipu),
+- string app di `main.dart.js`: `Buat Desain UI Mobile App`,
+  `Kirim Hasil Kerja`.
 
-## 3. Kenapa yang live baru landing (jujur)
+## 3. Deploy app Flutter (SELESAI 19 Nov 2026)
 
-`flutter build web` **hijau di CI** dan artifact `flutter-web`
-(`build/web`) terunggah — tapi unduhan artifact dari VM mentok
-approval host storage, jadi `build/web` tidak bisa dipindah ke
-`cf_pages.py` dari sini. Yang di-deploy adalah landing statis, dan
-landing menulis jujur bahwa aplikasi Flutter-nya adalah mock MVP
-dengan akun demo (bukan mengklaim app web sudah live). Landing
-**sengaja dipertahankan** sampai app menggantikannya — CI (`smoke`,
-`playwright-e2e`, `static-checks`) menguji `landing/`, jadi jangan
-hapus folder itu sebelum deploy app.
+Dulu unduhan artifact dari VM dianggap mentok (redirect blob storage
+ditolak) — ternyata **ada jalannya** (temuan worker #50 dez-download,
+terverifikasi di PR #2): ambil URL redirect 302 ke Azure Blob dari API
+GitHub, lalu fetch URL SAS itu dengan request **polos tanpa header auth
+surrogate** (header itulah yang ditolak Azure dengan 401). Jangan
+pernah fetch URL SAS dengan header auth.
 
-### Follow-up deploy (dari browser / mesin lain)
+Deploy yang live sekarang:
 
-Percobaan unduh artifact dari VM: **GAGAL** — `GET
-/actions/artifacts/14525255007/zip` timeout saat membaca redirect
-blob storage (19 Nov 2026, pr rework #49). Jangan diulang dari VM.
+- Run CI PR #2: **44520631712** (head `aca165fb`, CI 8/8 hijau).
+- Artifact **`flutter-web`** id `14527877686`, 14.757.463 byte,
+  `sha256:7dcf9fcd14b53e2ca805be022dca809eec6e8c775ee41a9dd08ef3869cd7d8e0`
+  (dicocokkan persis sebelum deploy).
+- Perintah: `cf_pages.py deploy cariquest <dir-hasil-unzip>` → 46 file,
+  deployment **`04dd6127-fecc-482b-8ab1-c234aee51b6b`**, status success.
+- Verifikasi live: root `200` + shell Flutter (`flutter_bootstrap.js`,
+  `Memuat papan quest`); `og-image.png` `200 image/png` 69.750 byte;
+  string app di `main.dart.js`: `Buat Desain UI Mobile App`,
+  `expert@demo.com`, `Kirim Hasil Kerja`. Catatan: `Tugas kampusmu`
+  HANYA ada di landing lama, bukan di app — jangan dipakai sebagai
+  marker app.
 
-1. Di browser/mesin lain, buka run CI main
-   `44513825297` (commit `f4c18c70`) → Artifacts → unduh
-   **`flutter-web`** (14,7 MB, `sha256:4bc28bad…2ec`, kedaluwarsa
-   17 Feb 2027) → unzip ke satu folder, mis. `~/flutter-web/`.
-2. Deploy folder itu ke Pages project **`cariquest`**:
-   ```bash
-   python3 ~/workspace/github-actions/cf_pages.py deploy cariquest ~/flutter-web
-   ```
-3. Verifikasi (pakai `python urllib` + User-Agent browser — UA
-   default Python kena 403 Cloudflare):
-   - root `200` + marker `Tugas kampusmu` dan
-     `Buat Desain UI Mobile App` (halaman app, bukan landing),
-   - `og-image.png` `200` `image/png` (ikut `build/web` karena
-     `web/og-image.png` sudah ada di repo sejak PR #2),
-   - login demo `expert@demo.com` / `demo123` masuk ke dashboard,
-     dan tombol **Kirim Hasil Kerja** membuka layar submit
-     (bukan langsung submit URL palsu).
-4. Setelah app live, `landing/` boleh dihapus dari repo (dan
-   `smoke`/`playwright-e2e` dialihkan ke app) — **bukan sebelum itu**.
+Deploy ulang (setelah ada PR baru yang mengubah app): unduh artifact
+`flutter-web` dari run CI main terbaru dengan pola 302→SAS polos di
+atas, cocokkan sha256 dengan `digest` artifact, unzip, deploy dengan
+perintah yang sama, lalu verifikasi seperti di atas. `landing/` tetap
+di repo (CI `smoke`/`playwright-e2e`/`static-checks` mengujinya) tapi
+tidak di-deploy; hapus hanya bila e2e dialihkan ke app.
 
 ## 4. CI
 

@@ -5,11 +5,11 @@
 [![Dart](https://img.shields.io/badge/Dart-%3E%3D3.3-1B4332?logo=dart&logoColor=white)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-E9C46A)](LICENSE)
 
-**Live:** https://cariquest.pages.dev/ — **SEMENTARA masih landing
-etalase statis** (`landing/`), bukan aplikasi Flutter-nya. Aplikasi
-Flutter sudah hijau `flutter build web` di CI, tapi `build/web`-nya
-belum bisa di-deploy dari VM (unduhan artifact GitHub mentok — lihat
-[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) § follow-up deploy). ·
+**Live:** https://cariquest.pages.dev/ — **aplikasi Flutter-nya
+sendiri** (`build/web` dari CI, di-deploy 19 Nov 2026 — lihat
+[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) §3). Folder `landing/`
+masih ada di repo sebagai etalase statis cadangan, tapi tidak lagi
+yang di-deploy. ·
 **Kode:** https://github.com/dezzorigin/cariquest
 
 CariQuest adalah marketplace talenta kampus untuk mahasiswa
@@ -112,9 +112,8 @@ cariquest/
 
 - Bukan produksi: tidak ada pembayaran sungguhan (QRIS/bank/VA hanya
   pilihan di UI) dan data tidak bertahan setelah aplikasi ditutup.
-- Build web Flutter hijau di CI, tapi yang live saat ini baru landing
-  etalase — deploy build web menyusul setelah play-test artifact CI
-  (lihat [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) §3).
+- Build web Flutter hijau di CI dan sudah live sebagai aplikasi
+  (bukan lagi landing — lihat [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) §3).
 - Build Android butuh pencabutan plugin `google-services` di
   `android/app/build.gradle` (tidak ada `google-services.json` di repo
   karena mock) — build web tidak terpengaruh.
