@@ -1,7 +1,6 @@
 // lib/features/rating/services/rating_repository.dart
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/errors/failure.dart';
 import '../../../shared/models/models.dart';
 import '../../../core/mock/mock_data.dart';
 

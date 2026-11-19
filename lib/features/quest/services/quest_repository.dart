@@ -2,25 +2,19 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_enums.dart';
-import '../../../core/errors/failure.dart';
 import '../../../core/mock/mock_data.dart';
 import '../../../shared/models/models.dart';
-import '../../notification/services/notification_repository.dart';
 
 final questRepositoryProvider = Provider<QuestRepository>((ref) {
-  return QuestRepository(
-    notificationRepository: ref.watch(notificationRepositoryProvider),
-  );
+  return QuestRepository();
 });
 
 class QuestRepository {
   final MockData _db = MockData.instance;
-  final NotificationRepository _notif;
-  
+
   static const int maxRevisions = 2;
 
-  QuestRepository({required NotificationRepository notificationRepository})
-      : _notif = notificationRepository;
+  QuestRepository();
 
   Future<void> postQuest(QuestModel quest) async {
     _db.addQuest(quest);

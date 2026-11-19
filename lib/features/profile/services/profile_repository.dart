@@ -2,7 +2,6 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/mock/mock_data.dart';
-import '../../../core/errors/failure.dart';
 import '../../../shared/models/models.dart';
 
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {

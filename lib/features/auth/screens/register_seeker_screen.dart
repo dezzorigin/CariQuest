@@ -137,11 +137,11 @@ class _RegisterSeekerScreenState extends ConsumerState<RegisterSeekerScreen> {
                   child: Container(
                     height: 160,
                     decoration: BoxDecoration(
-                      color: AppColors.gold.withOpacity(0.05),
+                      color: AppColors.gold.withValues(alpha: 0.05),
                       border: Border.all(
                         color: _ktpBytes != null
                             ? AppColors.success
-                            : AppColors.gold.withOpacity(0.3),
+                            : AppColors.gold.withValues(alpha: 0.3),
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(16),
@@ -154,7 +154,7 @@ class _RegisterSeekerScreenState extends ConsumerState<RegisterSeekerScreen> {
                               children: [
                                 Image.memory(_ktpBytes!, fit: BoxFit.cover),
                                 Container(
-                                  color: Colors.black.withOpacity(0.3),
+                                  color: Colors.black.withValues(alpha: 0.3),
                                   child: const Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [

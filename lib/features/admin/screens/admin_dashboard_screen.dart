@@ -77,7 +77,7 @@ class AdminDashboardScreen extends ConsumerWidget {
               pinned: true,
               expandedHeight: 120,
               automaticallyImplyLeading: false,
-              backgroundColor: const Color(0xFF1E0F45),
+              backgroundColor: AppColors.primaryDark,
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding:
                     const EdgeInsets.fromLTRB(20, 0, 20, 14),
@@ -367,15 +367,8 @@ class AdminDashboardScreen extends ConsumerWidget {
                       return Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF1E0F45),
-                              Color(0xFF4A1A9E),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(14),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -573,7 +566,7 @@ class _SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
         children: [
-          Icon(icon, color: const Color(0xFF4A1A9E), size: 18),
+          Icon(icon, color: AppColors.primaryDark, size: 18),
           const SizedBox(width: 8),
           Text(title,
               style: const TextStyle(

@@ -2,98 +2,111 @@
 
 import 'package:flutter/material.dart';
 
-/// CariQuest Brand Colors
-/// Primary: Deep Purple #6C2BD9
-/// Accent:  Gold         #F5A623
+/// CariQuest Brand Colors — "Rimba Pinus + Papan Pengumuman"
+/// (kontrak: docs/DESIGN.md, 19 Nov 2026 — menggantikan ungu #6C2BD9).
+///
+/// Nama lama dipertahankan (primary, gold, …) supaya 200+ pemakaian lama
+/// tetap kompilasi; nilainya dipetakan ke palet baru. Nama baru (rimba,
+/// daun, emas, kertas, tinta, bata) adalah nama kanonik desain.
 abstract class AppColors {
-  // ─── Brand ───────────────────────────────────────────────────
-  static const Color primary = Color(0xFF6C2BD9);
-  static const Color primaryLight = Color(0xFF9B6EE8);
-  static const Color primaryDark = Color(0xFF4A1A9E);
-  static const Color primaryContainer = Color(0xFFEDE8FB);
+  // ─── Brand (kanonik) ────────────────────────────────────────────
+  static const Color rimba = Color(0xFF1B4332); // primer
+  static const Color daun = Color(0xFF2D6A4F); // sekunder
+  static const Color emas = Color(0xFFE9C46A); // hadiah / harga
+  static const Color kertas = Color(0xFFFDFBF5); // latar
+  static const Color tinta = Color(0xFF1C2B21); // teks utama
+  static const Color bata = Color(0xFFBC4749); // sengketa / urgent
 
-  static const Color gold = Color(0xFFF5A623);
-  static const Color goldLight = Color(0xFFFFC654);
-  static const Color goldDark = Color(0xFFC67D00);
-  static const Color goldContainer = Color(0xFFFFF3D9);
+  // ─── Brand (nama lama → palet baru) ─────────────────────────────
+  static const Color primary = rimba;
+  static const Color primaryLight = daun;
+  static const Color primaryDark = Color(0xFF122E22);
+  static const Color primaryContainer = Color(0xFFDCEADF);
 
-  // ─── Semantic ─────────────────────────────────────────────────
-  static const Color success = Color(0xFF22C55E);
-  static const Color successLight = Color(0xFFDCFCE7);
-  static const Color warning = Color(0xFFF59E0B);
+  static const Color gold = emas;
+  static const Color goldLight = Color(0xFFF4D58D);
+  static const Color goldDark = Color(0xFF9A7B1E); // teks harga di kertas (AA)
+  static const Color goldContainer = Color(0xFFFBF3D9);
+
+  // ─── Semantic ───────────────────────────────────────────────────
+  static const Color success = daun;
+  static const Color successLight = Color(0xFFDCEADF);
+  static const Color warning = Color(0xFFD97706);
   static const Color warningLight = Color(0xFFFEF3C7);
-  static const Color error = Color(0xFFEF4444);
-  static const Color errorLight = Color(0xFFFEE2E2);
-  static const Color info = Color(0xFF3B82F6);
-  static const Color infoLight = Color(0xFFDBEAFE);
+  static const Color error = bata;
+  static const Color errorLight = Color(0xFFFBEAEA);
+  static const Color info = Color(0xFF2A7F62);
+  static const Color infoLight = Color(0xFFD8EFE3);
 
-  // ─── Neutral ──────────────────────────────────────────────────
+  // ─── Neutral (rumpun hijau, bukan abu netral) ───────────────────
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF0A0A0A);
-  static const Color grey50 = Color(0xFFF9FAFB);
-  static const Color grey100 = Color(0xFFF3F4F6);
-  static const Color grey200 = Color(0xFFE5E7EB);
-  static const Color grey300 = Color(0xFFD1D5DB);
-  static const Color grey400 = Color(0xFF9CA3AF);
-  static const Color grey500 = Color(0xFF6B7280);
-  static const Color grey600 = Color(0xFF4B5563);
-  static const Color grey700 = Color(0xFF374151);
-  static const Color grey800 = Color(0xFF1F2937);
-  static const Color grey900 = Color(0xFF111827);
+  static const Color grey50 = Color(0xFFF8F8F4);
+  static const Color grey100 = Color(0xFFF1F2EE);
+  static const Color grey200 = Color(0xFFE7EAE5);
+  static const Color grey300 = Color(0xFFD3DAD3);
+  static const Color grey400 = Color(0xFF9AA79D);
+  static const Color grey500 = Color(0xFF7A8A7D);
+  static const Color grey600 = Color(0xFF5B6B5E);
+  static const Color grey700 = Color(0xFF3D4A40);
+  static const Color grey800 = Color(0xFF243528);
+  static const Color grey900 = tinta;
 
-  // ─── Background ───────────────────────────────────────────────
-  static const Color background = Color(0xFFF8F7FF);
+  // ─── Background ─────────────────────────────────────────────────
+  static const Color background = kertas;
   static const Color surface = Color(0xFFFFFFFF);
-  static const Color surfaceVariant = Color(0xFFF3F0FF);
+  static const Color surfaceVariant = Color(0xFFF1EFE6);
   static const Color cardBg = Color(0xFFFFFFFF);
 
-  // ─── Dark Mode ────────────────────────────────────────────────
-  static const Color darkBackground = Color(0xFF0D0B14);
-  static const Color darkSurface = Color(0xFF1A1625);
-  static const Color darkCard = Color(0xFF241E35);
-  static const Color darkBorder = Color(0xFF2D2640);
+  // ─── Dark Mode ──────────────────────────────────────────────────
+  static const Color darkBackground = Color(0xFF101B15);
+  static const Color darkSurface = Color(0xFF1A2A21);
+  static const Color darkCard = Color(0xFF223528);
+  static const Color darkBorder = Color(0xFF2E4636);
 
-  // ─── Rank Colors ──────────────────────────────────────────────
-  static const Color rankBronze = Color(0xFFCD7F32);
+  // ─── Rank Colors ────────────────────────────────────────────────
+  static const Color rankBronze = Color(0xFFB0793F);
   static const Color rankSilver = Color(0xFFC0C0C0); // Skilled
-  static const Color rankGold = Color(0xFFFFD700);   // Veteran
+  static const Color rankGold = emas; // Veteran
   static const Color rankPlatinum = Color(0xFFE5E4E2); // Legend
-  static const Color rankMythic = Color(0xFF8B0000);  // Mythic
+  static const Color rankMythic = bata; // Mythic
 
-  // ─── Status Colors ────────────────────────────────────────────
-  static const Color statusPending = Color(0xFFF59E0B);
-  static const Color statusPaid = Color(0xFF3B82F6);
-  static const Color statusWorking = Color(0xFF8B5CF6);
-  static const Color statusReview = Color(0xFFF97316);
-  static const Color statusFinished = Color(0xFF22C55E);
-  static const Color statusDisputed = Color(0xFFEF4444);
+  // ─── Status Colors ──────────────────────────────────────────────
+  static const Color statusPending = Color(0xFF9A7B1E);
+  static const Color statusPaid = Color(0xFF2A7F62);
+  static const Color statusWorking = rimba;
+  static const Color statusReview = Color(0xFFA16207);
+  static const Color statusFinished = daun;
+  static const Color statusDisputed = bata;
 
-  // ─── Gradients ────────────────────────────────────────────────
+  // ─── Gradients ──────────────────────────────────────────────────
+  // Didefinisikan untuk kompatibilitas API; UI baru memakai bidang solid
+  // (kontrak DESIGN.md: tanpa gradient hero/background).
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFF8B47F0), Color(0xFF6C2BD9), Color(0xFF4A1A9E)],
+    colors: [Color(0xFF2D6A4F), Color(0xFF1B4332), Color(0xFF122E22)],
   );
 
   static const LinearGradient goldGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFFFFC654), Color(0xFFF5A623), Color(0xFFC67D00)],
+    colors: [Color(0xFFF4D58D), Color(0xFFE9C46A), Color(0xFFC9A227)],
   );
 
   static const LinearGradient heroGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFF6C2BD9), Color(0xFF9B6EE8), Color(0xFFF5A623)],
+    colors: [Color(0xFF1B4332), Color(0xFF2D6A4F), Color(0xFFE9C46A)],
   );
 
   static const LinearGradient darkCardGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFF241E35), Color(0xFF1A1625)],
+    colors: [Color(0xFF223528), Color(0xFF1A2A21)],
   );
 
   static const LinearGradient mythicGradient = LinearGradient(
-    colors: [Color(0xFF8B0000), Color(0xFFFF4500), Color(0xFFFFD700)],
+    colors: [Color(0xFFBC4749), Color(0xFFE9C46A), Color(0xFF1B4332)],
   );
 }

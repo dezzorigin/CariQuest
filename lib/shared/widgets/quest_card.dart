@@ -28,16 +28,16 @@ class QuestCard extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(14),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AppColors.grey200),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -46,6 +46,16 @@ class QuestCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Strip Emas — tepi tiket (kontrak DESIGN.md: detail khas).
+            Container(
+              height: 4,
+              width: 48,
+              decoration: BoxDecoration(
+                color: AppColors.gold,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 12),
             // Header: Title & Status
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,20 +92,20 @@ class QuestCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.red.shade50,
+                  color: AppColors.errorLight,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.timer, size: 14, color: Colors.red.shade700),
+                    const Icon(Icons.timer, size: 14, color: AppColors.error),
                     const SizedBox(width: 4),
                     Text(
                       'URGENT (+${(quest.urgentMarkupPct * 100).toInt()}% Fee)',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: Colors.red.shade700,
+                        color: AppColors.error,
                       ),
                     ),
                   ],
@@ -126,7 +136,7 @@ class QuestCard extends StatelessWidget {
                           : '${currencyFormat.format(quest.minBudget)} - ${currencyFormat.format(quest.maxBudget)}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
+                        color: AppColors.goldDark,
                       ),
                     ),
                   ],

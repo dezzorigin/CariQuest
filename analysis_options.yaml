@@ -9,6 +9,19 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  errors:
+    # Flutter 3.50 mendeprekasi package:flutter/material.dart
+    # ("Use package:material_ui"). Migrasi belum layak: material_ui
+    # adalah salinan terpisah (dua pohon Material; Theme.of /
+    # ScaffoldMessenger berhenti menemukan ancestor) dan plugin yang
+    # dipakai masih mengimpor library lama. Pola yang sama dipakai
+    # repo flutter/flutter sendiri (deprecated_member_use: ignore).
+    # Aktifkan lagi saat jalur migrasi terbukti. Deprekasi lain
+    # (mis. withOpacity) tetap diperbaiki ke API baru, bukan
+    # disembunyikan: lihat commit proper P1 #49.
+    deprecated_member_use: ignore
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`

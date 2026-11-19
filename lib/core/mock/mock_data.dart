@@ -14,7 +14,6 @@ class MockData {
   final _profilesController = StreamController<List<ProfileModel>>.broadcast();
   final _questsController = StreamController<List<QuestModel>>.broadcast();
   final _notificationsController = StreamController<List<NotificationModel>>.broadcast();
-  final _walletsController = StreamController<List<WithdrawalModel>>.broadcast();
 
   // In-Memory Storage
   List<UserModel> users = [];
@@ -39,9 +38,9 @@ class MockData {
     final now = DateTime.now();
 
     // 1. Users
-    final expertUid = 'demo_expert_1';
-    final seekerUid = 'demo_seeker_1';
-    final adminUid = 'demo_admin_1';
+    const expertUid = 'demo_expert_1';
+    const seekerUid = 'demo_seeker_1';
+    const adminUid = 'demo_admin_1';
 
     users = [
       UserModel(
@@ -96,14 +95,14 @@ class MockData {
 
     // 2. Profiles
     profiles = [
-      ProfileModel(
+      const ProfileModel(
         uid: expertUid,
         displayName: 'Aldi Firmansyah',
         bio: 'Mobile Developer & UI Designer. Mengerjakan Flutter & Figma.',
         skillTags: ['Flutter', 'UI/UX', 'Figma', 'Dart'],
         isVerifiedPro: true,
       ),
-      ProfileModel(
+      const ProfileModel(
         uid: seekerUid,
         displayName: 'Bunga Pratiwi',
         bio: 'Mahasiswa Manajemen yang butuh bantuan TA.',

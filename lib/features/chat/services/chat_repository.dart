@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import '../../../shared/models/chat_model.dart';
-import '../../notification/services/notification_repository.dart';
 import 'dart:async';
 
 final chatRepositoryProvider = Provider((ref) => ChatRepository());

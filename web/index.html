@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!--
+    CariQuest — Flutter web shell.
+    Dibuat saat proper P1 #49 (19 Nov 2026): repo ini sebelumnya tidak punya
+    folder web/ sehingga `flutter build web` tidak bisa jalan.
+    Shell ini HANYA pembungkus; isi aplikasi dirender Flutter (main.dart).
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="CariQuest — pasar talenta mahasiswa Universitas Syiah Kuala. Seeker memasang quest, Expert menawar, dana aman di escrow sampai quest selesai. Demo offline, tanpa server.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Open Graph / Twitter — URL kanonik = Pages (lihat docs/DEPLOYMENT.md) -->
+  <meta property="og:title" content="CariQuest — Pasar Talenta Mahasiswa USK">
+  <meta property="og:description" content="Seeker memasang quest, Expert menawar, dana aman di escrow. Marketplace talenta kampus Universitas Syiah Kuala — demo offline, akun demo siap pakai.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cariquest.pages.dev/">
+  <meta property="og:image" content="https://cariquest.pages.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CariQuest — Pasar Talenta Mahasiswa USK">
+  <meta name="twitter:description" content="Seeker memasang quest, Expert menawar, dana aman di escrow. Demo offline, akun demo siap pakai.">
+  <meta name="twitter:image" content="https://cariquest.pages.dev/og-image.png">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="CariQuest">
+  <meta name="theme-color" content="#1B4332">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <title>CariQuest — Pasar Talenta Mahasiswa USK</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    /* Layar muat: Kertas + Rimba, tanpa gradient (kontrak DESIGN.md). */
+    html, body { margin: 0; padding: 0; height: 100%; background: #FDFBF5; }
+    #loading {
+      height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #1B4332;
+    }
+    #loading .mark {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: #1B4332; color: #E9C46A;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px; font-weight: 800;
+    }
+    #loading p { margin: 0; font-size: 15px; color: #5B6B5E; }
+    #loading .bar { width: 148px; height: 4px; border-radius: 2px; background: #E7EAE5; overflow: hidden; }
+    #loading .bar i { display: block; height: 100%; width: 40%; border-radius: 2px; background: #E9C46A; animation: slide 1.2s ease-in-out infinite alternate; }
+    @keyframes slide { from { margin-left: 0; } to { margin-left: 60%; } }
+  </style>
+</head>
+<body>
+  <div id="loading" aria-hidden="true">
+    <div class="mark">Q</div>
+    <p>Memuat papan quest…</p>
+    <div class="bar"><i></i></div>
+  </div>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

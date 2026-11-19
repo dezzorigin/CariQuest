@@ -1,0 +1,1 @@
+{"description":"E2E Playwright untuk landing statis CariQuest (hanya CI).","devDependencies":{"@playwright/test":"^1.49.0"},"name":"cariquest-landing-e2e","private":true,"scripts":{"e2e":"playwright test"},"version":"1.0.0"}

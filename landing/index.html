@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CariQuest — Pasar Talenta Mahasiswa USK</title>
+<meta name="description" content="CariQuest — pasar talenta mahasiswa Universitas Syiah Kuala. Seeker memasang quest, Expert menawar, dana aman di escrow sampai quest selesai. Demo offline, akun demo siap pakai.">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="CariQuest — Pasar Talenta Mahasiswa USK">
+<meta property="og:description" content="Seeker memasang quest, Expert menawar, dana aman di escrow. Marketplace talenta kampus Universitas Syiah Kuala — demo offline, akun demo siap pakai.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cariquest.pages.dev/">
+<meta property="og:image" content="https://cariquest.pages.dev/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CariQuest — Pasar Talenta Mahasiswa USK">
+<meta name="twitter:description" content="Seeker memasang quest, Expert menawar, dana aman di escrow. Demo offline, akun demo siap pakai.">
+<meta name="twitter:image" content="https://cariquest.pages.dev/og-image.png">
+
+<meta name="theme-color" content="#1B4332">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#papan">Lewati ke papan quest</a>
+
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="#atas" aria-label="CariQuest — kembali ke atas">
+      <svg class="compass" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="24" cy="24" r="20"/><path d="M24 6v36M6 24h36"/><path d="M24 6l3 12-3 3-3-3z" fill="currentColor" stroke="none"/><path d="M24 42l-3-12 3-3 3 3z" fill="currentColor" stroke="none"/><path d="M11 11l8 8M37 37l-8-8M37 11l-8 8M11 37l8-8" stroke-width="1.5"/></svg>
+      <span class="brand-name">CariQuest</span>
+      <span class="brand-tag">USK · Banda Aceh</span>
+    </a>
+    <nav class="site-nav" aria-label="Navigasi utama">
+      <a href="#papan">Papan Quest</a>
+      <a href="#alur">Alur</a>
+      <a href="#peran">Peran</a>
+      <a href="#demo">Akun Demo</a>
+    </nav>
+    <a class="btn btn-gold" href="#demo">Coba Akun Demo</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile" aria-label="Buka menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Navigasi seluler" hidden>
+    <a href="#papan">Papan Quest</a>
+    <a href="#alur">Alur</a>
+    <a href="#peran">Peran</a>
+    <a href="#demo">Akun Demo</a>
+    <a href="#demo" class="btn btn-gold">Coba Akun Demo</a>
+  </nav>
+</header>
+
+<main id="atas">
+  <!-- ── Hero: papan dua kolom ─────────────────────────────────── -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">Pasar talenta mahasiswa · Universitas Syiah Kuala</p>
+        <h1>Tugas kampusmu,<br>quest seseorang.</h1>
+        <p class="lede">Seeker memasang quest — desain UI, olah data SPSS, coding OOP,
+          terjemah jurnal. Expert sesama mahasiswa menawar, mengerjakan, dan
+          dibayar lewat escrow. Semua di dalam kampus, semua tercatat.</p>
+        <div class="hero-cta">
+          <a class="btn btn-rimba" href="#papan">Lihat Papan Quest</a>
+          <a class="btn btn-outline" href="#demo">Coba Akun Demo</a>
+        </div>
+        <ul class="hero-facts" aria-label="Fakta data demo">
+          <li><strong>5</strong> quest demo</li>
+          <li><strong>3</strong> akun demo</li>
+          <li><strong>Rp30.000–Rp300.000</strong> rentang anggaran quest</li>
+          <li><strong>4.8</strong> rating Expert demo</li>
+        </ul>
+        <p class="demo-note">Angka di atas adalah data demo dari aplikasi
+          (<code>lib/core/mock/mock_data.dart</code>) — bukan pengguna sungguhan.</p>
+      </div>
+
+      <!-- Kartu quest unggulan: karcis dengan tepi berlubang -->
+      <article class="ticket ticket-featured" aria-label="Quest unggulan">
+        <div class="ticket-top">
+          <div>
+            <p class="ticket-kicker">Quest unggulan · Dicari</p>
+            <h2>Buat Desain UI Mobile App</h2>
+            <p class="ticket-desc">Butuh 5 screen design untuk aplikasi
+              e-commerce: Login, Home, Cart, Checkout, Profile.</p>
+          </div>
+          <span class="chip chip-pending">Mencari Expert</span>
+        </div>
+        <div class="ticket-perforation" aria-hidden="true"></div>
+        <div class="ticket-bottom">
+          <div class="ticket-price">
+            <span class="label">Anggaran</span>
+            <strong>Rp 150–300 rb</strong>
+          </div>
+          <div class="ticket-meta">
+            <span class="label">Tenggat (data demo)</span>
+            <strong>3 hari lagi</strong>
+          </div>
+          <div class="ticket-meta">
+            <span class="label">Dipasang oleh</span>
+            <strong>Bunga Pratiwi</strong>
+          </div>
+        </div>
+        <p class="ticket-foot">Karcis ini contoh — quest sungguhan ada di
+          aplikasi, lengkap dengan bid, chat, dan pelacakan.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── Papan quest: 5 quest demo asli ────────────────────────── -->
+  <section class="board" id="papan" aria-labelledby="papan-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Papan pengumuman</p>
+          <h2 id="papan-title">Quest yang sedang ditempel di papan</h2>
+          <p class="section-sub">Lima quest dari data demo aplikasi — judul,
+            anggaran, dan statusnya sama persis dengan yang ada di dalam app.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Saring quest menurut status">
+          <button type="button" class="filter is-active" data-filter="semua">Semua</button>
+          <button type="button" class="filter" data-filter="pending">Dicari</button>
+          <button type="button" class="filter" data-filter="working">Dikerjakan</button>
+          <button type="button" class="filter" data-filter="review">Review</button>
+          <button type="button" class="filter" data-filter="finished">Selesai</button>
+        </div>
+      </div>
+
+      <div class="quest-list" id="quest-list">
+        <article class="ticket" data-status="pending">
+          <div class="ticket-top">
+            <div>
+              <h3>Buat Desain UI Mobile App</h3>
+              <p class="ticket-desc">Butuh 5 screen design untuk aplikasi e-commerce.</p>
+            </div>
+            <span class="chip chip-pending">Mencari Expert</span>
+          </div>
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <div class="ticket-bottom">
+            <div class="ticket-price"><span class="label">Anggaran</span><strong>Rp 150–300 rb</strong></div>
+            <div class="ticket-meta"><span class="label">Tenggat (data demo)</span><strong>3 hari lagi</strong></div>
+            <div class="ticket-meta"><span class="label">Seeker</span><strong>Bunga Pratiwi</strong></div>
+          </div>
+        </article>
+
+        <article class="ticket" data-status="working">
+          <div class="ticket-top">
+            <div>
+              <h3>Bantu Kerjain Laporan Penelitian</h3>
+              <p class="ticket-desc">Analisis data statistik pakai SPSS. Semua data sudah ada, tinggal diolah dan dibaca hasilnya.</p>
+            </div>
+            <span class="chip chip-working">Sedang Dikerjakan</span>
+          </div>
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <div class="ticket-bottom">
+            <div class="ticket-price"><span class="label">Harga final</span><strong>Rp 75 rb</strong></div>
+            <div class="ticket-meta"><span class="label">Tenggat (data demo)</span><strong>1 hari lagi · Urgent</strong></div>
+            <div class="ticket-meta"><span class="label">Expert</span><strong>Aldi Firmansyah</strong></div>
+          </div>
+        </article>
+
+        <article class="ticket" data-status="review">
+          <div class="ticket-top">
+            <div>
+              <h3>Edit Video Presentasi Tugas Akhir</h3>
+              <p class="ticket-desc">Potong-potong video dan tambahin subtitle. Durasi awal 15 menit, dipotong jadi 5 menit.</p>
+            </div>
+            <span class="chip chip-review">Review Hasil</span>
+          </div>
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <div class="ticket-bottom">
+            <div class="ticket-price"><span class="label">Harga final</span><strong>Rp 100 rb</strong></div>
+            <div class="ticket-meta"><span class="label">Dikirim (data demo)</span><strong>1 jam lalu</strong></div>
+            <div class="ticket-meta"><span class="label">Expert</span><strong>Aldi Firmansyah</strong></div>
+          </div>
+        </article>
+
+        <article class="ticket" data-status="finished">
+          <div class="ticket-top">
+            <div>
+              <h3>Coding Tugas OOP Java</h3>
+              <p class="ticket-desc">Buat sistem perpustakaan sederhana. CLI app aja, gak usah GUI.</p>
+            </div>
+            <span class="chip chip-finished">Selesai</span>
+          </div>
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <div class="ticket-bottom">
+            <div class="ticket-price"><span class="label">Harga final</span><strong>Rp 100 rb</strong></div>
+            <div class="ticket-meta"><span class="label">Selesai (data demo)</span><strong>1 hari lalu</strong></div>
+            <div class="ticket-meta"><span class="label">Expert</span><strong>Aldi Firmansyah</strong></div>
+          </div>
+        </article>
+
+        <article class="ticket" data-status="pending">
+          <div class="ticket-top">
+            <div>
+              <h3>Translasi Jurnal Bahasa Inggris</h3>
+              <p class="ticket-desc">10 halaman, pakai bahasa akademik yang bagus. Bidang biologi.</p>
+            </div>
+            <span class="chip chip-pending">Mencari Expert</span>
+          </div>
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <div class="ticket-bottom">
+            <div class="ticket-price"><span class="label">Anggaran</span><strong>Rp 30–60 rb</strong></div>
+            <div class="ticket-meta"><span class="label">Tenggat (data demo)</span><strong>5 hari lagi</strong></div>
+            <div class="ticket-meta"><span class="label">Seeker</span><strong>Bunga Pratiwi</strong></div>
+          </div>
+        </article>
+      </div>
+      <p class="empty-note" id="empty-note" hidden>Tidak ada quest dengan status ini di data demo.</p>
+    </div>
+  </section>
+
+  <!-- ── Alur: loop 4 langkah ──────────────────────────────────── -->
+  <section class="flow" id="alur" aria-labelledby="alur-title">
+    <div class="wrap">
+      <p class="kicker">Satu loop, dari pasang sampai cair</p>
+      <h2 id="alur-title">Quest jalan, dana tidak jalan sendiri</h2>
+      <ol class="flow-steps">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Seeker memasang quest</h3>
+          <p>Tulis tugas, jobdesk, tenggat, dan rentang anggaran. Quest ditempel di papan dan bisa dilihat semua Expert.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v10H5zM12 14v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Expert menawar, dana dikunci</h3>
+          <p>Expert mengajukan harga. Seeker memilih, membayar, dan dana dikunci di escrow — bukan langsung ke Expert.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <h3>Dikerjakan dan dilacak</h3>
+          <p>Status bergerak Pending → Working → Review. Seeker melihat progres; hasil dikirim lewat aplikasi.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Review, rating, dana cair</h3>
+          <p>Seeker mereview dan memberi rating. Dana escrow cair ke dompet Expert. Sengketa? Admin memediasi.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── Peran: asimetris, bukan 3 kartu identik ───────────────── -->
+  <section class="roles" id="peran" aria-labelledby="peran-title">
+    <div class="wrap">
+      <p class="kicker">Tiga peran, satu papan</p>
+      <h2 id="peran-title">Kamu datang sebagai siapa?</h2>
+      <div class="roles-grid">
+        <article class="role role-seeker">
+          <p class="role-tag">Seeker — yang butuh bantuan</p>
+          <h3>Pasang quest, terima hasil, beri rating.</h3>
+          <p>Buat quest dalam hitungan menit, bandingkan penawar, pantau
+            progres sampai selesai. Dana hanya cair kalau hasilmu sudah
+            direview.</p>
+          <ul>
+            <li>Pasang quest + tenggat + anggaran</li>
+            <li>Pilih Expert dari daftar penawar</li>
+            <li>Lacak Pending → Working → Review → Finished</li>
+          </ul>
+        </article>
+        <article class="role role-expert">
+          <p class="role-tag">Expert — yang mengerjakan</p>
+          <h3>Portofolio, bid, dompet.</h3>
+          <p>Profilmu menampilkan skill, peringkat, dan riwayat quest.
+            Akun demo Expert: Aldi Firmansyah, Informatika — 12 quest
+            selesai, rating 4.8 dari 15 ulasan, saldo Rp250.000.</p>
+          <ul>
+            <li>Bid di feed quest sesuai skill</li>
+            <li>Peringkat naik dari Newcomer ke Legendary</li>
+            <li>Tarik saldo ke bank / e-wallet</li>
+          </ul>
+        </article>
+        <article class="role role-admin">
+          <p class="role-tag">Admin — penjaga papan</p>
+          <h3>Verifikasi pengguna, pantau transaksi, mediasi sengketa.</h3>
+          <p>Admin tidak ikut mengerjakan quest. Ia memastikan KTM/KTP
+            terverifikasi, mengawasi arus escrow, dan menengahi kalau
+            Seeker dan Expert berselisih.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Akun demo ─────────────────────────────────────────────── -->
+  <section class="demo" id="demo" aria-labelledby="demo-title">
+    <div class="wrap demo-grid">
+      <div>
+        <p class="kicker">Tanpa daftar, tanpa server</p>
+        <h2 id="demo-title">Masuk dengan akun demo</h2>
+        <p>Aplikasi ini <strong>mock MVP offline 100%</strong>: tanpa Firebase,
+          tanpa API key, tanpa akun sungguhan. Semua data tinggal di memori
+          selama aplikasi jalan. Klik alamat email untuk menyalinnya, lalu
+          tempel di layar login aplikasi.</p>
+        <p class="demo-pass">Semua akun demo memakai kata sandi yang sama:
+          <button type="button" class="copy-pass" data-copy="demo123" aria-label="Salin kata sandi demo123">demo123</button></p>
+      </div>
+      <table class="demo-table">
+        <caption>Akun demo siap pakai</caption>
+        <thead>
+          <tr><th scope="col">Peran</th><th scope="col">Email login</th><th scope="col">Nama demo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Expert</th>
+            <td><button type="button" class="copy-email" data-copy="expert@demo.com">expert@demo.com</button></td>
+            <td>Aldi Firmansyah</td>
+          </tr>
+          <tr>
+            <th scope="row">Seeker</th>
+            <td><button type="button" class="copy-email" data-copy="seeker@demo.com">seeker@demo.com</button></td>
+            <td>Bunga Pratiwi</td>
+          </tr>
+          <tr>
+            <th scope="row">Admin</th>
+            <td><button type="button" class="copy-email" data-copy="admin@demo.com">admin@demo.com</button></td>
+            <td>System Admin</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Di balik layar ────────────────────────────────────────── -->
+  <section class="behind">
+    <div class="wrap behind-grid">
+      <div>
+        <p class="kicker">Di balik layar</p>
+        <h2>Flutter, Riverpod, dan data pura-pura yang jujur</h2>
+        <p>Aplikasi ditulis dengan Flutter 3.x + Riverpod + go_router.
+          Seluruh "backend"-nya adalah <code>MockData</code> di memori yang
+          mensimulasikan latensi dan state — sengaja, supaya demo ini bisa
+          jalan di mana saja tanpa konfigurasi cloud.</p>
+      </div>
+      <ul class="behind-links">
+        <li><a href="https://github.com/dezzorigin/cariquest">Kode sumber di GitHub</a></li>
+        <li><a href="https://github.com/dezzorigin/cariquest/blob/main/docs/PRD.md">PRD — apa yang dibangun dan kenapa</a></li>
+        <li><a href="https://github.com/dezzorigin/cariquest/blob/main/docs/ARCHITECTURE.md">Arsitektur + diagram alur</a></li>
+        <li><a href="https://github.com/dezzorigin/cariquest/blob/main/docs/DESIGN.md">Kontrak desain (Rimba/Emas)</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <p>© 2026 CariQuest · Marketplace talenta mahasiswa Universitas Syiah Kuala, Banda Aceh.</p>
+    <p><a href="https://github.com/dezzorigin/cariquest">GitHub</a> · <a href="https://github.com/dezzorigin/cariquest/blob/main/LICENSE">MIT</a> · Data di halaman ini adalah data demo.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
