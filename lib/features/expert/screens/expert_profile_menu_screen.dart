@@ -40,14 +40,10 @@ class ExpertProfileMenuScreen extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Container(
               decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF4A1A9E), Color(0xFF6C2BD9)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+                color: AppColors.primary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(28),
-                  bottomRight: Radius.circular(28),
+                  bottomLeft: Radius.circular(14),
+                  bottomRight: Radius.circular(14),
                 ),
               ),
               child: SafeArea(

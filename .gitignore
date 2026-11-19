@@ -44,3 +44,22 @@ app.*.map.json
 lib/firebase_options.dart
 android/app/google-services.json
 .env
+
+# Kunci & kredensial — jangan pernah ke-commit
+*.jks
+*.keystore
+android/key.properties
+android/local.properties
+local.properties
+*.pem
+*.p12
+
+# Artefak tooling lokal
+__pycache__/
+.ruff_cache/
+playwright-report/
+test-results/
+node_modules/
+dist/
+coverage/
+*.orig

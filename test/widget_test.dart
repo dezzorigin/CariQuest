@@ -1,30 +1,52 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+// Widget test StatusChip — label tiap status lifecycle quest
+// (menggantikan template counter bawaan `flutter create` yang tidak
+// pernah cocok dengan aplikasi ini).
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:cariquest/main.dart';
+import 'package:cariquest/core/constants/app_enums.dart';
+import 'package:cariquest/shared/widgets/status_chip.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const CariQuestApp());
+  const cases = <QuestStatus, String>{
+    QuestStatus.pending: 'Mencari Expert',
+    QuestStatus.paid: 'Dana di Escrow',
+    QuestStatus.working: 'Sedang Dikerjakan',
+    QuestStatus.review: 'Review Hasil',
+    QuestStatus.finished: 'Selesai',
+    QuestStatus.disputed: 'Banding',
+    QuestStatus.cancelled: 'Dibatalkan',
+  };
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  for (final entry in cases.entries) {
+    testWidgets('StatusChip ${entry.key.name} menampilkan "${entry.value}"',
+        (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(body: StatusChip(status: entry.key)),
+        ),
+      );
+      expect(find.text(entry.value), findsOneWidget);
+    });
+  }
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('StatusChip label kustom menimpa label status', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: StatusChip(status: QuestStatus.pending, label: 'Khusus'),
+        ),
+      ),
+    );
+    expect(find.text('Khusus'), findsOneWidget);
+    expect(find.text('Mencari Expert'), findsNothing);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('StatusChip tanpa status menampilkan Unknown', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(body: StatusChip()),
+      ),
+    );
+    expect(find.text('Unknown'), findsOneWidget);
   });
 }

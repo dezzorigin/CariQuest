@@ -133,14 +133,14 @@ class _ExpertHeroBannerState extends State<ExpertHeroBanner> {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: isCurrent
-                            ? const Color(0xFF4A1A9E).withValues(alpha: 0.08)
+                            ? AppColors.primaryDark.withValues(alpha: 0.08)
                             : isUnlocked
                                 ? Colors.green.withValues(alpha: 0.04)
                                 : Colors.grey.shade50,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
                           color: isCurrent
-                              ? const Color(0xFF4A1A9E).withValues(alpha: 0.4)
+                              ? AppColors.primaryDark.withValues(alpha: 0.4)
                               : isUnlocked
                                   ? Colors.green.withValues(alpha: 0.3)
                                   : Colors.grey.shade200,
@@ -154,7 +154,7 @@ class _ExpertHeroBannerState extends State<ExpertHeroBanner> {
                             height: 36,
                             decoration: BoxDecoration(
                               color: isCurrent
-                                  ? const Color(0xFF4A1A9E)
+                                  ? AppColors.primaryDark
                                   : isUnlocked
                                       ? Colors.green
                                       : Colors.grey.shade300,
@@ -190,7 +190,7 @@ class _ExpertHeroBannerState extends State<ExpertHeroBanner> {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
                                         color: isCurrent
-                                            ? const Color(0xFF4A1A9E)
+                                            ? AppColors.primaryDark
                                             : Colors.black87,
                                       ),
                                     ),
@@ -200,7 +200,7 @@ class _ExpertHeroBannerState extends State<ExpertHeroBanner> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 7, vertical: 2),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFF4A1A9E),
+                                          color: AppColors.primaryDark,
                                           borderRadius:
                                               BorderRadius.circular(6),
                                         ),
@@ -241,7 +241,7 @@ class _ExpertHeroBannerState extends State<ExpertHeroBanner> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                   color: isCurrent
-                                      ? const Color(0xFF4A1A9E)
+                                      ? AppColors.primaryDark
                                       : Colors.grey.shade600,
                                 ),
                               ),
@@ -271,11 +271,7 @@ class _ExpertHeroBannerState extends State<ExpertHeroBanner> {
       children: [
         Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF4A1A9E), Color(0xFF6C2BD9), Color(0xFF9B6EE8)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            color: AppColors.primary,
           ),
           child: Stack(
             children: [

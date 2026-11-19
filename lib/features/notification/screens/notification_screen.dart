@@ -242,7 +242,7 @@ class _NotifTile extends StatelessWidget {
       case NotificationType.submitted:
         return Colors.orange;
       case NotificationType.rankUp:
-        return Colors.purple;
+        return AppColors.primary;
       case NotificationType.boost:
         return Colors.deepOrange;
       case NotificationType.system:

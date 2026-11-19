@@ -459,7 +459,7 @@ class _TxCard extends StatelessWidget {
       case QuestStatus.review:
         return Colors.orange;
       default:
-        return Colors.purple;
+        return AppColors.primary;
     }
   }
 

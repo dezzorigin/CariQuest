@@ -1,8 +1,11 @@
 // lib/shared/widgets/status_chip.dart
 
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_enums.dart';
 
+/// Chip status lifecycle quest — warna dari palet kontrak (docs/DESIGN.md),
+/// bukan rona Material acak. Latar = warna status 12% di atas kertas.
 class StatusChip extends StatelessWidget {
   final QuestStatus? status;
   final Color? color;
@@ -17,52 +20,52 @@ class StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color bgColor = color?.withOpacity(0.1) ?? Colors.grey.shade100;
-    Color textColor = color ?? Colors.grey.shade800;
+    Color bgColor = color?.withOpacity(0.12) ?? AppColors.grey100;
+    Color textColor = color ?? AppColors.grey800;
     String text = label ?? 'Unknown';
 
     if (status != null) {
       switch (status!) {
         case QuestStatus.pending:
-          bgColor = Colors.orange.shade100;
-          textColor = Colors.orange.shade800;
+          bgColor = AppColors.statusPending.withOpacity(0.12);
+          textColor = AppColors.statusPending;
           text = 'Mencari Expert';
           break;
         case QuestStatus.paid:
-          bgColor = Colors.indigo.shade100;
-          textColor = Colors.indigo.shade800;
+          bgColor = AppColors.statusPaid.withOpacity(0.12);
+          textColor = AppColors.statusPaid;
           text = 'Dana di Escrow';
           break;
         case QuestStatus.working:
-          bgColor = Colors.purple.shade100;
-          textColor = Colors.purple.shade800;
+          bgColor = AppColors.statusWorking.withOpacity(0.12);
+          textColor = AppColors.statusWorking;
           text = 'Sedang Dikerjakan';
           break;
         case QuestStatus.review:
-          bgColor = Colors.cyan.shade100;
-          textColor = Colors.cyan.shade800;
+          bgColor = AppColors.statusReview.withOpacity(0.12);
+          textColor = AppColors.statusReview;
           text = 'Review Hasil';
           break;
         case QuestStatus.finished:
-          bgColor = Colors.green.shade100;
-          textColor = Colors.green.shade800;
+          bgColor = AppColors.statusFinished.withOpacity(0.12);
+          textColor = AppColors.statusFinished;
           text = 'Selesai';
           break;
         case QuestStatus.disputed:
-          bgColor = Colors.red.shade100;
-          textColor = Colors.red.shade800;
+          bgColor = AppColors.statusDisputed.withOpacity(0.12);
+          textColor = AppColors.statusDisputed;
           text = 'Banding';
           break;
         case QuestStatus.cancelled:
-          bgColor = Colors.grey.shade300;
-          textColor = Colors.grey.shade800;
+          bgColor = AppColors.grey200;
+          textColor = AppColors.grey700;
           text = 'Dibatalkan';
           break;
       }
     }
 
     if (color != null) {
-      bgColor = color!.withOpacity(0.1);
+      bgColor = color!.withOpacity(0.12);
       textColor = color!;
     }
     if (label != null) {
@@ -73,7 +76,7 @@ class StatusChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
         text,

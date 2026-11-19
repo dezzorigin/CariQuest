@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CariQuest — Diagram Arsitektur</title>
+<style>
+  :root {
+    --rimba: #1b4332; --daun: #2d6a4f; --emas: #e9c46a; --emas-gelap: #9a7b1e;
+    --kertas: #fdfbf5; --tinta: #1c2b21; --kabut: #5b6b5e; --garis: #e7eae5;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--kertas); color: var(--tinta);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif; line-height: 1.6; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 48px 24px 64px; }
+  h1 { font-family: Georgia, serif; font-size: 40px; margin: 0 0 8px; }
+  h2 { font-family: Georgia, serif; font-size: 26px; margin: 48px 0 8px; }
+  p.lede { color: var(--kabut); max-width: 62ch; }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--daun); margin: 0 0 12px; }
+  figure { margin: 24px 0; }
+  figcaption { font-size: 13px; color: var(--kabut); margin-top: 12px; max-width: 68ch; }
+  svg { width: 100%; height: auto; display: block; }
+  .box { fill: #fff; stroke: var(--garis); stroke-width: 1.5; }
+  .box-hi { fill: var(--rimba); }
+  .t { font: 600 15px "Plus Jakarta Sans", sans-serif; fill: var(--tinta); }
+  .t-sm { font: 400 12.5px "Plus Jakarta Sans", sans-serif; fill: var(--kabut); }
+  .t-w { font: 700 15px "Plus Jakarta Sans", sans-serif; fill: #fff; }
+  .t-wsm { font: 400 12.5px "Plus Jakarta Sans", sans-serif; fill: #c8dcd2; }
+  .t-gold { font: 700 13px "Plus Jakarta Sans", sans-serif; fill: var(--emas-gelap); }
+  .arrow { stroke: var(--daun); stroke-width: 1.8; fill: none; marker-end: url(#ah); }
+  .arrow-r { stroke: var(--bata, #bc4749); stroke-width: 1.8; fill: none; marker-end: url(#ah); }
+  .st { fill: #fff; stroke: var(--rimba); stroke-width: 1.8; }
+  .st-gold { fill: #fbf3d9; stroke: var(--emas-gelap); stroke-width: 1.8; }
+  .st-red { fill: #fbeaea; stroke: #bc4749; stroke-width: 1.8; }
+  .st-t { font: 700 14px "Plus Jakarta Sans", sans-serif; fill: var(--tinta); }
+  .st-s { font: 400 11.5px "Plus Jakarta Sans", sans-serif; fill: var(--kabut); }
+  a { color: var(--rimba); }
+  ul { color: var(--kabut); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">CariQuest · docs/architecture.html</p>
+  <h1>Diagram arsitektur</h1>
+  <p class="lede">Dua gambar: tumpukan lapisan aplikasi Flutter, dan satu-satunya
+    state machine yang penting — lifecycle quest. Diagram digambar tangan
+    sebagai SVG (bukan Mermaid), mengikuti gaya diagram-design.</p>
+
+  <h2>1 · Tumpukan lapisan</h2>
+  <figure>
+    <svg viewBox="0 0 880 560" role="img" aria-label="Diagram tumpukan lapisan CariQuest">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0L10 5L0 10z" fill="#2d6a4f"/>
+        </marker>
+      </defs>
+
+      <!-- Layar -->
+      <rect class="box" x="40" y="24" width="800" height="86" rx="14"/>
+      <text class="t" x="64" y="58">Layar — features/*/screens</text>
+      <text class="t-sm" x="64" y="82">auth · quest · expert · seeker · wallet · admin · chat · rating · notification · dispute · payment · profile</text>
+
+      <!-- Widget -->
+      <rect class="box" x="40" y="134" width="800" height="66" rx="14"/>
+      <text class="t" x="64" y="164">Widget bersama — shared/widgets</text>
+      <text class="t-sm" x="64" y="188">QuestCard · StatusChip · CustomButton · RankBadge · UserAvatar · ReportDialog</text>
+
+      <!-- Provider -->
+      <rect class="box" x="40" y="224" width="800" height="66" rx="14"/>
+      <text class="t" x="64" y="254">Provider / Controller — Riverpod StateNotifier</text>
+      <text class="t-sm" x="64" y="278">auth · quest · bid · wallet · payment · chat · dispute · profile</text>
+
+      <!-- Repository -->
+      <rect class="box" x="40" y="314" width="800" height="66" rx="14"/>
+      <text class="t" x="64" y="344">Repository — kontrak data (hari ini semuanya mock)</text>
+      <text class="t-sm" x="64" y="368">auth · quest · bid · wallet · payment · chat · rating · notification · dispute · profile</text>
+
+      <!-- MockData -->
+      <rect class="box-hi" x="40" y="404" width="800" height="66" rx="14"/>
+      <text class="t-w" x="64" y="434">Mesin data — core/mock/mock_data.dart (MockData singleton)</text>
+      <text class="t-wsm" x="64" y="458">List in-memory + StreamController.broadcast per koleksi (usersStream, questsStream, …)</text>
+
+      <!-- Model -->
+      <rect class="box" x="40" y="494" width="800" height="46" rx="14"/>
+      <text class="t" x="64" y="515">Model — shared/models (Equatable)</text>
+      <text class="t-sm" x="64" y="523"></text>
+      <text class="t-sm" x="360" y="515">User · Profile · Quest · Bid · Chat · Transaction · Review · Dispute · Withdrawal</text>
+
+      <!-- Arrows -->
+      <path class="arrow" d="M440 110 L440 132"/>
+      <path class="arrow" d="M440 200 L440 222"/>
+      <path class="arrow" d="M440 290 L440 312"/>
+      <path class="arrow" d="M440 380 L440 402"/>
+      <path class="arrow" d="M440 470 L440 492"/>
+    </svg>
+    <figcaption>Aliran satu arah ke bawah; balik ke atas hanya lewat stream.
+      Tidak ada HTTP dan tidak ada database — “real-time” di sini adalah
+      stream in-memory. Satu-satunya yang bertahan antar restart adalah
+      sesi login di <code>shared_preferences</code>.</figcaption>
+  </figure>
+
+  <h2>2 · Lifecycle quest</h2>
+  <figure>
+    <svg viewBox="0 0 880 340" role="img" aria-label="Diagram lifecycle quest">
+      <defs>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0L10 5L0 10z" fill="#2d6a4f"/>
+        </marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0L10 5L0 10z" fill="#bc4749"/>
+        </marker>
+      </defs>
+
+      <!-- main chain -->
+      <rect class="st" x="20" y="40" width="130" height="64" rx="14"/>
+      <text class="st-t" x="85" y="66" text-anchor="middle">Pending</text>
+      <text class="st-s" x="85" y="86" text-anchor="middle">Mencari Expert</text>
+
+      <rect class="st" x="200" y="40" width="130" height="64" rx="14"/>
+      <text class="st-t" x="265" y="66" text-anchor="middle">Paid</text>
+      <text class="st-s" x="265" y="86" text-anchor="middle">Dana di escrow</text>
+
+      <rect class="st" x="380" y="40" width="130" height="64" rx="14"/>
+      <text class="st-t" x="445" y="66" text-anchor="middle">Working</text>
+      <text class="st-s" x="445" y="86" text-anchor="middle">Dikerjakan</text>
+
+      <rect class="st" x="560" y="40" width="130" height="64" rx="14"/>
+      <text class="st-t" x="625" y="66" text-anchor="middle">Review</text>
+      <text class="st-s" x="625" y="86" text-anchor="middle">Hasil dikirim</text>
+
+      <rect class="st-gold" x="730" y="40" width="130" height="64" rx="14"/>
+      <text class="st-t" x="795" y="66" text-anchor="middle">Finished</text>
+      <text class="st-s" x="795" y="86" text-anchor="middle">Dana cair + rating</text>
+
+      <path class="arrow" d="M150 72 L198 72"/>
+      <text class="t-sm" x="174" y="60" text-anchor="middle">bayar</text>
+      <path class="arrow" d="M330 72 L378 72"/>
+      <text class="t-sm" x="354" y="60" text-anchor="middle">mulai</text>
+      <path class="arrow" d="M510 72 L558 72"/>
+      <text class="t-sm" x="534" y="60" text-anchor="middle">kirim</text>
+      <path class="arrow" d="M690 72 L728 72"/>
+      <text class="t-sm" x="709" y="60" text-anchor="middle">setuju</text>
+
+      <!-- disputed -->
+      <rect class="st-red" x="560" y="200" width="130" height="64" rx="14"/>
+      <text class="st-t" x="625" y="226" text-anchor="middle">Disputed</text>
+      <text class="st-s" x="625" y="246" text-anchor="middle">Mediasi Admin</text>
+      <path class="arrow-r" d="M625 104 L625 198" stroke="#bc4749" marker-end="url(#ah3)"/>
+      <text class="t-sm" x="640" y="155">banding</text>
+
+      <rect class="st" x="730" y="200" width="130" height="64" rx="14"/>
+      <text class="st-t" x="795" y="226" text-anchor="middle">Putusan</text>
+      <text class="st-s" x="795" y="246" text-anchor="middle">Finished / refund</text>
+      <path class="arrow" d="M690 232 L728 232"/>
+
+      <!-- cancelled -->
+      <rect class="st" x="20" y="200" width="130" height="64" rx="14"/>
+      <text class="st-t" x="85" y="226" text-anchor="middle">Cancelled</text>
+      <text class="st-s" x="85" y="246" text-anchor="middle">Dibatalkan</text>
+      <path class="arrow-r" d="M85 104 L85 198" stroke="#bc4749" marker-end="url(#ah3)"/>
+      <text class="t-sm" x="100" y="155">batal</text>
+    </svg>
+    <figcaption>Aturan uang: Expert hanya dibayar setelah Seeker menyetujui
+      hasil (transisi Review → Finished). Dana dikunci di escrow sejak Paid.
+      Satu-satunya jalan keluar dari Disputed adalah putusan Admin.</figcaption>
+  </figure>
+
+  <h2>Catatan</h2>
+  <ul>
+    <li>Detail teks: <a href="ARCHITECTURE.md">docs/ARCHITECTURE.md</a> ·
+      kontrak desain: <a href="DESIGN.md">docs/DESIGN.md</a> ·
+      PRD: <a href="PRD.md">docs/PRD.md</a>.</li>
+    <li>Diagram ini statis — kalau lifecycle berubah, ubah SVG ini juga
+      (jangan biarkan diagram dan kode bercerai).</li>
+  </ul>
+</div>
+</body>
+</html>

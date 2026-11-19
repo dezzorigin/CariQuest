@@ -121,7 +121,7 @@ abstract class AppTheme {
           color: AppColors.cardBg,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
             side: const BorderSide(color: AppColors.grey200),
           ),
           clipBehavior: Clip.antiAlias,
@@ -158,7 +158,7 @@ abstract class AppTheme {
         dialogTheme: DialogThemeData(
           backgroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(14),
           ),
           elevation: 8,
         ),
@@ -166,8 +166,8 @@ abstract class AppTheme {
           backgroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(24),
-              topRight: Radius.circular(24),
+              topLeft: Radius.circular(14),
+              topRight: Radius.circular(14),
             ),
           ),
           showDragHandle: true,
@@ -236,7 +236,7 @@ abstract class AppTheme {
           color: AppColors.darkCard,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
             side: const BorderSide(color: AppColors.darkBorder),
           ),
           clipBehavior: Clip.antiAlias,

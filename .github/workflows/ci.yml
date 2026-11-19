@@ -1,0 +1,180 @@
+name: CI
+
+# CI untuk cariquest (repo P1 #49 — Flutter pertama di rantai:
+# marketplace talenta mahasiswa USK, mock MVP offline 100%).
+# Job:
+#   flutter-analyze — flutter analyze (tanpa --fatal-infos; error = gagal).
+#   flutter-test     — flutter test (36 tes: QuestModel lifecycle +
+#                      round-trip Map, MockData demo, StatusChip widget,
+#                      tema palet kontrak).
+#   flutter-build-web — flutter build web --release (repo sebelumnya
+#                      TANPA folder web/; scaffold ditambah di PR ini) +
+#                      upload artifact build/web.
+#   advisory-sweep   — OSV batch ekosistem Pub (scripts/advisory-sweep.py,
+#                      pola repo #24-#47); HIGH/CRITICAL = gagal.
+#                      JANGAN pakai npm audit sebagai gate (repo ini
+#                      bukan Node; tidak ada package-lock.json).
+#   gitleaks         — secret-scan SELURUH riwayat (fetch-depth 0).
+#   static-checks    — gate P0 anti-slop + tag OG/Twitter + data asli repo
+#                      + regenerasi og-image.png (Pillow).
+#   playwright-e2e   — landing statis di server lokal (desktop + mobile).
+#                      HANYA di CI; Chromium lokal tidak bisa start di VM dev.
+#                      Mobile = Pixel 7 (Chromium) — JANGAN iPhone.
+#   smoke            — file yang di-deploy ada & tidak kosong.
+# Repo ini TIDAK punya package-lock.json: CI pakai `npm install`
+# (bukan `npm ci`) dan TANPA `cache: npm` di setup-node.
+# Semua step shell TIDAK memakai `| tee` tanpa pipefail (pelajaran #44).
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Flutter: analyze ───────────────────────────────────────────────
+  flutter-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter (stable)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Flutter analyze
+        run: flutter analyze
+
+  # ── Flutter: test ──────────────────────────────────────────────────
+  flutter-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter (stable)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Flutter test
+        run: flutter test
+
+  # ── Flutter: build web ─────────────────────────────────────────────
+  flutter-build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter (stable)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Flutter build web
+        run: flutter build web --release
+
+      - name: Build web berisi shell + bundle JS
+        run: |
+          set -euo pipefail
+          test -s build/web/index.html
+          test -s build/web/flutter_bootstrap.js
+          test -s build/web/main.dart.js
+          grep -q "CariQuest" build/web/index.html
+
+      - name: Upload build web (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-web
+          path: build/web
+          if-no-files-found: error
+
+  # ── Advisory sweep (OSV batch, ekosistem Pub, tanpa auth) ──────────
+  advisory-sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sweep dependensi Pub di OSV
+        run: python3 scripts/advisory-sweep.py
+
+  # ── Gitleaks: secret-scan seluruh riwayat ──────────────────────────
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Gitleaks scan (riwayat penuh)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ── Pemeriksaan statis: gate P0 + tag OG + data asli ───────────────
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow (generator og-image)
+        run: pip install pillow
+
+      - name: Regenerasi og-image.png + ikon web (pastikan skrip jalan)
+        run: python3 scripts/make-og-image.py
+
+      - name: Gate P0 + tag OG/Twitter + data asli repo
+        run: python3 scripts/check-static.py
+
+  # ── E2E Playwright (landing statis, HANYA di CI) ───────────────────
+  playwright-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E landing (desktop + mobile)
+        run: npm run e2e
+
+  # ── Smoke: file deploy ada & tidak kosong ──────────────────────────
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: File deploy ada & tidak kosong
+        run: |
+          set -euo pipefail
+          for f in landing/index.html landing/styles.css landing/app.js landing/favicon.svg landing/og-image.png; do
+            test -s "$f" || { echo "FAIL: $f hilang/kosong"; exit 1; }
+          done
+          test "$(stat -c%s landing/og-image.png)" -ge 10240 || { echo "FAIL: og-image.png < 10KB"; exit 1; }
+          echo "OK: semua file deploy ada"
